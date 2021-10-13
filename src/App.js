@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import jsPDF from 'jspdf';
 import './App.css'
+
+
 function App() {
   const componentRef  = useRef()
   const handlePrint = useReactToPrint({
