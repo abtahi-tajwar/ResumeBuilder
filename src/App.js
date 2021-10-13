@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Template1 from './Components/Templates/Template1'
+import { useRef } from 'react';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
+import jsPDF from 'jspdf';
+import './App.css'
 function App() {
+  const componentRef  = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current
+  })
+
+  const pdfDownload = e => {
+    e.preventDefault()
+    let doc = new jsPDF({
+      orientation: "portrait",
+      unit: "pt",
+      format: 'letter'
+    });
+    console.log(doc.internal.pageSize.width);
+    doc.html(document.querySelector(".pdfDownload"), {
+      callback: () => {
+        doc.save('resume.pdf');
+      }
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handlePrint}>Print</button>
+      <button onClick={pdfDownload}>Download</button>
+      <div className="pdfDownload">
+        <Template1 ref={componentRef }/>
+      </div>
+      
     </div>
   );
 }
