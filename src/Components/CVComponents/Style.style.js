@@ -3,10 +3,29 @@ import styled from 'styled-components'
 
 const jsPdfScaleFactor = 0.749;
 
+export const text_sizes = {
+    text_sm: '9px',
+    text_md: '12px',
+    text_xl: '36px'
+}
+export const colors = {
+    primary: '#2079c7',
+    gray: '#666666',
+}
+export const fonts = {
+    primary: "'Merriweather', 'Times New Roman', Times, serif",
+    secondary: "'Open Sans', sans-serif"
+}
+export const spacing = {
+    standard: '15px',
+    section: '20px',
+    linegap: '5px'
+}
+
 
 export const CV = styled.div`
-    font-size: 9px;
-    font-family: 'Merriweather', 'Times New Roman', Times, serif;
+    font-size: ${text_sizes.text_sm};
+    font-family: ${fonts.primary};
 `
 export const LetterPage = styled.div`
     padding: 0.4in 0.6in 0.6in 0.6in;
@@ -14,24 +33,26 @@ export const LetterPage = styled.div`
     width: ${612 * 1}pt;
     background-color: ${props => props.bgColor};
     box-sizing: border-box;    
+    border: 0.5px dotted gray;
 `;
 export const Heading1 = styled.h1`
-    font-size: 36px;
+    font-size: ${text_sizes.text_xl};
     font-weight: bold;
 `
 export const Section = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: ${spacing.section};
 `
 export const DoubleColumn = styled.div`
     display: flex;
     height: 100%;
     width: 100%;
-    & div:nth-child(1) {
+    gap: 20px;
+    & > div:nth-child(1) {
         flex: 1;
-        background-color: red;
+        /* border: 0.5px dotted gray; */
     }
-    & div:nth-child(2) {
+    & > div:nth-child(2) {
         flex: 1;
-        background-color: blue;
+        border: 0.5px dotted gray;
     }
 `
