@@ -17,8 +17,8 @@ export const fonts = {
     secondary: "'Open Sans', sans-serif"
 }
 export const spacing = {
-    standard: '15px',
-    section: '20px',
+    standard: '1.5em',
+    section: '5em',
     linegap: '5px'
 }
 
@@ -34,6 +34,8 @@ export const LetterPage = styled.div`
     background-color: ${props => props.bgColor};
     box-sizing: border-box;    
     border: 0.5px dotted gray;
+    display: flex;
+    flex-direction: column;
 `;
 export const Heading1 = styled.h1`
     font-size: ${text_sizes.text_xl};
@@ -44,8 +46,6 @@ export const Section = styled.div`
 `
 export const DoubleColumn = styled.div`
     display: flex;
-    height: 100%;
-    width: 100%;
     gap: 20px;
     & > div:nth-child(1) {
         flex: 1;
@@ -53,6 +53,18 @@ export const DoubleColumn = styled.div`
     }
     & > div:nth-child(2) {
         flex: 1;
-        border: 0.5px dotted gray;
+        /* border: 0.5px dotted gray; */
     }
 `
+export const Row = styled.div`
+    height: ${props => props.height};
+    ${props => props.style}
+`
+export const Title = styled.div`
+    font-weight: 700;
+    color: ${colors.primary};
+    margin-bottom: ${spacing.standard};
+    text-transform: uppercase;
+    font-family: ${fonts.secondary};
+    font-size: ${text_sizes.text_md};
+`;
