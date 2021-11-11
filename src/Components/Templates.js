@@ -1,118 +1,7 @@
 import React from 'react'
-import HeaderInformations from './Sections/HeaderInformations'
-import Heading from './Sections/Heading'
-import Listings from './Sections/Listings'
-import SimpleListing from './Sections/SimpleListing'
-import SimpleText from './Sections/SimpleText'
-import { CV, DoubleColumn, LetterPage, Section } from './Style.style'
-function Builder({ page, contents }) {
-    return (
-        <CV>
-            {renderPage(
-               contents.map((content, index )=> {
-                    return (
-                        <div key={index}>
-                            {printLayout(content)}
-                        </div>
-                    )
-                })
-            )}            
-        </CV>
-    )
-    function renderPage(jsx) {
-        if(page === 'letter') {
-            return(
-                <LetterPage>
-                    {jsx}
-                </LetterPage>
-            ) 
-        }
-    }  
-    function printLayout(obj) {
-        if("type" in obj) {            
-            if(obj.type === 'double_column') {
-                return (
-                    <DoubleColumn>
-                        <div>{printSections(obj.content.left)}</div>
-                        <div>{printSections(obj.content.right)}</div>
-                    </DoubleColumn>
-                )
-            } else {
-                return (
-                    <Section>
-                        <div>{obj.content}</div>
-                    </Section>                
-                )
-            }
-        } else {            
-            return (
-                <Section>
-                    <div>{obj.content}</div>
-                </Section>                
-            )
-        }
-    }
-    function printSections(obj) {
-        
-        return obj.map((section, index) => {
-            if("type" in section) {
-                if(section.type === 'listing') {
-                    return (
-                        <Listings
-                            key={index}
-                            title={section.content.title}
-                            items={section.content.items}
-                        />
-                    )
-                } else if(section.type === 'simple_listing') {
-                    return (
-                        <SimpleListing
-                            key={index}
-                            title = {section.content.title}
-                            items = {section.content.items}
-                        />
-                    )
-                } else if(section.type === 'simple_text') {
-                    return (
-                        <SimpleText
-                            key={index}
-                            title = {section.content.title}
-                            text = {section.content.text}
-                        />
-                    )
-                } 
-                else if(section.type === 'heading') {
-                    return (
-                        <Heading 
-                            key={index}
-                            heading = {section.content.heading}
-                            subheading = {section.content.subheading}
-                        />
-                    )
-                } else if(section.type === 'heading_info') {
-                    return(
-                        <HeaderInformations 
-                            key={index}
-                            informations = {section.content.informations}
-                        />
-                    )
-                }
-                else {
-                    return (
-                        <Section>{section.content}</Section>
-                    )
-                }
-            } else {
-                return (
-                    <Section>{section.content}</Section>
-                )
-            }
-        })
-    }
-}
-Builder.defaultProps = {
-    page: 'letter',
-    contents: [
+
+export const template1 = (cvInfo) => {
+    return ([
         {
             type: "double_column",
             content: {
@@ -120,7 +9,7 @@ Builder.defaultProps = {
                     {
                         type: "heading",
                         content: {
-                            heading: 'Abtahi Tajwar',
+                            heading: cvInfo.name,
                             subheading: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'
                         }
                     }
@@ -284,6 +173,5 @@ Builder.defaultProps = {
                 
             
         }
-    ]
+    ])
 }
-export default Builder

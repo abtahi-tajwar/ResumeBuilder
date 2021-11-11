@@ -1,6 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
-* {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,500&display=swap');
+* {    
     margin: 0;
     padding: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+.container {
+    padding: 20px;
+}
+.flex {
+    display: flex;
+}
+.flex-1 {
+    flex: 1;
+}
+.light-text {
+    font-weight: 300;
+}
+.p-1 {
+    padding: 5;
+}
+.m-1 {
+    margin: 5px;
 }
