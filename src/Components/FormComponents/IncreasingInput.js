@@ -24,7 +24,6 @@ function IncreasingInput({ cvInfo, setCvInfo, keyName }) {
     const removeItem = (e) => {
         
         let updatedInfo = cvInfo[keyName].filter((input, index) => {
-            console.log(index, e.target.getAttribute('data-removeIndex'))
             return index != e.target.getAttribute('data-removeIndex')
         })  
         setCvInfo({

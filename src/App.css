@@ -149,3 +149,9 @@ button {
     display: flex;
     
 }
+.scroll-window {
+    overflow-y: scroll;
+}
+.full-height {
+    height: 100vh;
+}

@@ -49,11 +49,11 @@ export const DoubleColumn = styled.div`
     display: flex;
     gap: 20px;
     & > div:nth-child(1) {
-        flex: 1;
+        flex: ${props => (props.left && props.right) ? props.left : 1 };
         /* border: 0.5px dotted gray; */
     }
     & > div:nth-child(2) {
-        flex: 1;
+        flex: ${props => (props.left && props.right) ? props.right : 1 };
         /* border: 0.5px dotted gray; */
     }
 `

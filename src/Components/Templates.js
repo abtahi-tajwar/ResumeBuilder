@@ -2,6 +2,8 @@ export const template1 = (cvInfo) => {
     return ([
         {
             type: "double_column",
+            left: 3,
+            right: 1,
             content: {
                 left: [
                     {
@@ -27,78 +29,30 @@ export const template1 = (cvInfo) => {
         },
         {
             type: "double_column",
+            left: 3,
+            right: 1,
             content: 
             {
                 left: [
                     {
                         type: "listing",
                         content: {
-                            title: 'Listings',
+                            title: cvInfo.list_1_title,
                             items: cvInfo.list_1
                         }
                     },
                     {
                         type: "listing",
                         content: {
-                            title: 'Listings',
-                            items: [
-                                {
-                                    title: 'Item 1',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 2',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 3',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                }
-                            ]
+                            title: cvInfo.list_2_title,
+                            items: cvInfo.list_2
                         }
                     },
                     {
                         type: "listing",
                         content: {
-                            title: 'Listings',
-                            items: [
-                                {
-                                    title: 'Item 1',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 2',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 3',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                }
-                            ]
+                            title: cvInfo.list_3_title,
+                            items: cvInfo.list_3
                         }
                     }
                 ],
@@ -106,25 +60,15 @@ export const template1 = (cvInfo) => {
                     {
                         type: "simple_listing",
                         content: {
-                            title: "Simple Listing",
-                            items: [
-                                {content: 'List content 1', subcontent: 'List sub content' },
-                                {content: 'List content 2', subcontent: 'List sub content' },
-                                {content: 'List content 3', subcontent: 'List sub content' },
-                                {content: 'List content 4', subcontent: 'List sub content' },
-                            ]
+                            title: cvInfo.simple_list_1_title,
+                            items: cvInfo.simple_list_1
                         }
                     },
                     {
                         type: "simple_listing",
                         content: {
-                            title: "Simple Listing",
-                            items: [
-                                {content: 'List content 1', subcontent: 'List sub content' },
-                                {content: 'List content 2', subcontent: 'List sub content' },
-                                {content: 'List content 3', subcontent: 'List sub content' },
-                                {content: 'List content 4', subcontent: 'List sub content' },
-                            ]
+                            title: cvInfo.simple_list_2_title,
+                            items: cvInfo.simple_list_2
                         }
                     },
                     {

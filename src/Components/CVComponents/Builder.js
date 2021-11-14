@@ -32,7 +32,10 @@ function Builder({ page, contents }) {
         if("type" in obj) {            
             if(obj.type === 'double_column') {
                 return (
-                    <DoubleColumn>
+                    <DoubleColumn
+                        left={obj.left ? obj.left : 1}
+                        right={obj.right ? obj.right : 1}
+                    >
                         <div>{printSections(obj.content.left)}</div>
                         <div>{printSections(obj.content.right)}</div>
                     </DoubleColumn>

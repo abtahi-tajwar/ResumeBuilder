@@ -2,16 +2,13 @@ import React from 'react'
 import LabelnputGroup from './LabelnputGroup'
 import { useState, useEffect } from 'react'
 import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
-function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
+
+function SimpleListingInput({ cvInfo, setCvInfo, keyName}) {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [typing, setTyping] = useState(false)
     const [item, setItem] = useState({
-        title: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].title,
-        subtitle: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].subtitle,
-        link: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].link,
-        date: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].date,
-        extra: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].extra,
-        description: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].description,
+        content: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].content,
+        subcontent: cvInfo[keyName][selectedIndex] && cvInfo[keyName][selectedIndex].subcontent,
     })
     const handleInput = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value })
@@ -20,12 +17,8 @@ function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
     const handleDataSelect = (e) => {
         setSelectedIndex(parseInt(e.target.getAttribute('data-selectIndex')))
         setItem({
-            title: cvInfo[keyName][selectedIndex].title,
-            subtitle: cvInfo[keyName][selectedIndex].subtitle,
-            link: cvInfo[keyName][selectedIndex].link,
-            date: cvInfo[keyName][selectedIndex].date,
-            extra: cvInfo[keyName][selectedIndex].extra,
-            description: cvInfo[keyName][selectedIndex].description,
+            content: cvInfo[keyName][selectedIndex].content,
+            subcontent: cvInfo[keyName][selectedIndex].subcontent,
         })
     }
     const addData = () => {
@@ -34,12 +27,8 @@ function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
             [keyName]: [
                 ...cvInfo[keyName],
                 {
-                    title: "New Title",
-                    subtitle: "New Subtitle",
-                    link: "",
-                    date: "",
-                    extra: "",
-                    description: "",
+                    content: "New Content",
+                    subcontent: "New Subcontent",
                 }
             ]
         })
@@ -76,48 +65,19 @@ function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
         <div className="row">
             <div>
                 <LabelnputGroup
-                    label="Title"
+                    label="Content"
                     type="text"
-                    name="title"
-                    value={item.title}
+                    name="content"
+                    value={item.content}
                     onChange={handleInput}
                 />
                 <LabelnputGroup
-                    label="Subtitle"
+                    label="Sub Content"
                     type="text"
-                    name="subtitle"
-                    value={item.subtitle}
+                    name="subcontent"
+                    value={item.subcontent}
                     onChange={handleInput}
                 />
-                <LabelnputGroup
-                    label="Link"
-                    type="text"
-                    name="link"
-                    value={item.link}
-                    onChange={handleInput}
-                />
-                <LabelnputGroup
-                    label="Date"
-                    type="text"
-                    name="date"
-                    value={item.date}
-                    onChange={handleInput}
-                />
-                <LabelnputGroup
-                    label="Extra"
-                    type="text"
-                    name="extra"
-                    value={item.extra}
-                    onChange={handleInput}
-                />
-                <div className="mt">                    
-                    <label className="mt-2">Description</label>
-                    <textarea
-                        name="description"
-                        onChange={handleInput}
-                        className="text-input mt-1 bb w-100"
-                    >{item.description}</textarea>
-                </div>
             </div>
             <div>
                 {cvInfo[keyName].map((item, index) => 
@@ -129,8 +89,8 @@ function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
                             onClick={handleDataSelect}
                         >
                             <div className="flex-1" style={{pointerEvents: 'none'}}>
-                                <p><b>{item.title}</b></p>
-                                <p>{item.subtitle}</p>
+                                <p><b>{item.content}</b></p>
+                                <p>{item.subcontent}</p>
                             </div>
                             <div 
                                 className="close_icon" 
@@ -151,4 +111,4 @@ function MultipleGroupInput({ cvInfo, setCvInfo, keyName }) {
     )
 }
 
-export default MultipleGroupInput
+export default SimpleListingInput
