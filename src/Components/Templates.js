@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const template1 = (cvInfo) => {
     return ([
         {
@@ -10,7 +8,7 @@ export const template1 = (cvInfo) => {
                         type: "heading",
                         content: {
                             heading: cvInfo.name,
-                            subheading: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'
+                            subheading: cvInfo.subtitle
                         }
                     }
                 ],
@@ -19,14 +17,8 @@ export const template1 = (cvInfo) => {
                         type: "heading_info",
                         content: {
                             informations: [
-                                [
-                                    '123 Your Street',
-                                    'Your City, ST 12345'
-                                ],
-                                [
-                                    '(123) 456-7890',
-                                    'no_reply@example.com'
-                                ]
+                                cvInfo.heading_info_1,
+                                cvInfo.heading_info_2
                             ]
                         }
                     }
@@ -42,32 +34,7 @@ export const template1 = (cvInfo) => {
                         type: "listing",
                         content: {
                             title: 'Listings',
-                            items: [
-                                {
-                                    title: 'Item 1',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 2',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                },
-                                {
-                                    title: 'Item 3',
-                                    subtitle: 'Place list items according to your priority',
-                                    link: 'https://abtahi-tajwar.github.io/abtahitajwar/',
-                                    date: 'month 20xx - present',
-                                    extra: '',
-                                    description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.'
-                                }
-                            ]
+                            items: cvInfo.list_1
                         }
                     },
                     {

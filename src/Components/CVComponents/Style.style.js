@@ -11,6 +11,7 @@ export const text_sizes = {
 export const colors = {
     primary: '#2079c7',
     gray: '#666666',
+    light_gray: '#f0f0f0',
 }
 export const fonts = {
     primary: "'Merriweather', 'Times New Roman', Times, serif",
@@ -68,3 +69,9 @@ export const Title = styled.div`
     font-family: ${fonts.secondary};
     font-size: ${text_sizes.text_md};
 `;
+export const Divider = styled.div`
+    width: 100%;
+    height: 2px;
+    margin: 10px 5px 10px 5px;
+    background-color: ${colors.primary}
+`
