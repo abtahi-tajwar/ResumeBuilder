@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from './Sections/Avatar'
 import HeaderInformations from './Sections/HeaderInformations'
 import Heading from './Sections/Heading'
 import Listings from './Sections/Listings'
@@ -55,8 +56,7 @@ function Builder({ page, contents }) {
             )
         }
     }
-    function printSections(obj) {
-        
+    function printSections(obj) {        
         return obj.map((section, index) => {
             if("type" in section) {
                 if(section.type === 'listing') {
@@ -65,6 +65,7 @@ function Builder({ page, contents }) {
                             key={index}
                             title={section.content.title}
                             items={section.content.items}
+                            theme = {section.theme ? section.theme : null}
                         />
                     )
                 } else if(section.type === 'simple_listing') {
@@ -97,6 +98,14 @@ function Builder({ page, contents }) {
                         <HeaderInformations 
                             key={index}
                             informations = {section.content.informations}
+                        />
+                    )
+                } else if(section.type === 'avatar') {
+                    return (
+                        <Avatar
+                            key={index}
+                            src={section.content.src}
+                            size={section.content.size}
                         />
                     )
                 }

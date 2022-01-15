@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import CVPage from './Templates/CVPage';
 import { template1 } from './Templates'
 import TextInput from './FormComponents/TextInput';
+import ImageUpload from './FormComponents/ImageUpload';
 import { Divider } from './CVComponents/Style.style';
 import IncreasingInput from './FormComponents/IncreasingInput';
 import MultipleGroupInput from './FormComponents/MultipleGroupInput';
@@ -18,6 +19,7 @@ function Editor() {
     const [cvInfo, setCvInfo] = useState({
         name: 'Your Name',
         subtitle: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
+        avatar: 'test.png',
         heading_info_1: [
             '123 Your Street',
             'Your City, ST 12345'
@@ -143,6 +145,12 @@ function Editor() {
             [e.target.name]: e.target.value
         })
     }
+    const handleAvatarUpload = (src) => {
+        setCvInfo({
+            ...cvInfo,
+            avatar: src
+        })
+    }
     return (
         <div>
             <div className="flex">
@@ -188,6 +196,15 @@ function Editor() {
                                     keyName="heading_info_2"
                                 />
                             </div>
+                        </div>
+                        {/* Avatar Image Upload */}
+                        <div className="mt-2">
+                            <h2>Upload Image</h2>
+                            <ImageUpload
+                                name="avatar"
+                                handleAvatarUpload={handleAvatarUpload}
+                                value={cvInfo.avatar}
+                            />
                         </div>
                         {/* Left list 1 input groups */}
                         <h2 className="mt-2">Left List 1</h2>  

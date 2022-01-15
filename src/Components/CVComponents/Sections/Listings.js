@@ -2,21 +2,20 @@ import React from 'react'
 import { Section, text_sizes, colors, fonts, spacing } from '../Style.style'
 import styled from 'styled-components'
 
-
-
-function Listings({ title, items }) {
+function Listings({ title, items, theme }) {
     return (
         <React.Fragment>
             <Section>
                 <Title>{title}</Title>
                 {items.map(item => {
-                    return(<ListItem style={styles.item}>
-                        <div className="title"><b>{item.title}</b> &#183; <span>{item.subtitle}</span></div>
-                        <p className="date">{item.date}</p>
-                        <a href={item.link}>{item.link}</a>
-                        <p className="extra">{item.extra}</p>
-                        <p>{item.description}</p>
-                    </ListItem>)
+                    return(
+                        <ListItem style={styles.item}>
+                            <div className="title"><b>{item.title}</b> &#183; <span>{item.subtitle}</span></div>
+                            <p className="date">{item.date}</p>
+                            <a href={item.link}>{item.link}</a>
+                            <p className="extra">{item.extra}</p>
+                            <p>{item.description}</p>
+                        </ListItem>)
                 })}                
             </Section>
         </React.Fragment>

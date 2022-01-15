@@ -20,6 +20,7 @@ export const fonts = {
 export const spacing = {
     standard: '1.5em',
     section: '5em',
+    subsection: '2.5em',
     linegap: '5px'
 }
 
@@ -44,6 +45,9 @@ export const Heading1 = styled.h1`
 `
 export const Section = styled.div`
     margin-bottom: ${spacing.section};
+`
+export const SubSection = styled.div`
+    margin-bottom: ${spacing.subsection};
 `
 export const DoubleColumn = styled.div`
     display: flex;

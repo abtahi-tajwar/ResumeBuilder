@@ -12,9 +12,7 @@ export const template1 = (cvInfo) => {
                             heading: cvInfo.name,
                             subheading: cvInfo.subtitle
                         }
-                    }
-                ],
-                right: [
+                    },
                     {
                         type: "heading_info",
                         content: {
@@ -22,6 +20,15 @@ export const template1 = (cvInfo) => {
                                 cvInfo.heading_info_1,
                                 cvInfo.heading_info_2
                             ]
+                        }
+                    }
+                ],
+                right: [
+                    {
+                        type: "avatar",
+                        content: {
+                            src: cvInfo.avatar,
+                            size: '128px'
                         }
                     }
                 ]
