@@ -30,7 +30,7 @@ export const CV = styled.div`
     font-family: ${fonts.primary};
 `
 export const LetterPage = styled.div`
-    padding: 0.4in 0.6in 0.6in 0.6in;
+    padding: ${props => props.margin === 'auto' ? '0.4in 0.6in 0.6in 0.6in' : props.margin};
     height: ${792 * 1}pt;
     width: ${612 * 1}pt;
     background-color: ${props => props.bgColor};
@@ -52,12 +52,20 @@ export const SubSection = styled.div`
 export const DoubleColumn = styled.div`
     display: flex;
     gap: 20px;
+    height: ${props => props.height ? props.height : 'auto'};
+    & > div {
+        box-sizing: border-box;
+    }
     & > div:nth-child(1) {
         flex: ${props => (props.left && props.right) ? props.left : 1 };
+        background-color: ${props => props.leftBgColor ? props.leftBgColor : 'white'};
+        ${props => props.padding && `padding : ${props.padding}`}
         /* border: 0.5px dotted gray; */
     }
     & > div:nth-child(2) {
         flex: ${props => (props.left && props.right) ? props.right : 1 };
+        background-color: ${props => props.rightBgColor ? props.rightBgColor : 'white'};
+        ${props => props.padding && `padding : ${props.padding}`}
         /* border: 0.5px dotted gray; */
     }
 `

@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import Builder from '../CVComponents/Builder'
+import { LetterPage } from '../CVComponents/Style.style'
+import Compact from './Compact/Compact'
 
 export default class CVPage extends Component {
     render() {
         const { page, contents } = this.props
         return (
             <div>
-                <Builder page={page} contents={contents}/>
+                {/* <Builder page={page} contents={contents}/> */}
+                <LetterPage>
+                    <Compact />
+                </LetterPage>
             </div>
             
             // <CV>

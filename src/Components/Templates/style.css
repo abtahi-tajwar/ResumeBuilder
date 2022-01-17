@@ -1,0 +1,62 @@
+:root {
+  --compact-primary: #e6e6e6;
+  --compact-accent: #2b8aba;
+}
+
+.wrapper {
+  font-family: Cambria, Georgia, serif !important;
+  height: 100%;
+}
+
+/* Basic Backgrounds */
+.bg-primary {
+  background-color: var(--compact-primary);
+}
+
+.bg-accent {
+  background-color: var(--compact-accent);
+}
+
+/* Basic widths */
+.w-100 {
+  width: 100%;
+}
+
+/* Basic heights */
+.h-25 {
+  height: 25px;
+}
+
+.h-100 {
+  height: 100px;
+}
+
+.h-150 {
+  height: 150px;
+}
+
+/* Basic Margins */
+.mt-1 {
+  margin-top: 5px;
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mt-4 {
+  margin-top: 25px;
+}
+
+.mt-5 {
+  margin-top: 35px;
+}
+
+.mt-6 {
+  margin-top: 50px;
+}
+/*# sourceMappingURL=style.css.map */

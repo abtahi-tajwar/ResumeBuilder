@@ -1,3 +1,32 @@
+export const ruposhi = (cvInfo) => {
+    return ({
+        content: [
+            {
+                type: "double_column",
+                left: 1,
+                right: 3,
+                leftBgColor: '#ffeac7',
+                padding: '15px',
+                height: '100%',
+                content: {
+                    left: [{
+                        type: "avatar",
+                        content: {
+                            src: cvInfo.avatar,
+                            size: '128px'
+                        }
+                    }],
+                    right: [{
+                        type: "heading",
+                        content: {
+                            heading: "Right"
+                        }
+                    }],
+                }
+            }
+        ]
+    })
+}
 export const template1 = (cvInfo) => {
     return ([
         {

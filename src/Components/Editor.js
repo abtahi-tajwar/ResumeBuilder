@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import jsPDF from 'jspdf';
 import CVPage from './Templates/CVPage';
-import { template1 } from './Templates'
+import { template1, ruposhi } from './Templates'
 import TextInput from './FormComponents/TextInput';
 import ImageUpload from './FormComponents/ImageUpload';
 import { Divider } from './CVComponents/Style.style';
@@ -138,7 +138,7 @@ function Editor() {
         }
         });
     }
-    const template = template1(cvInfo)
+    const template = ruposhi(cvInfo)
     const handleForm = (e) => {
         setCvInfo({
             ...cvInfo,

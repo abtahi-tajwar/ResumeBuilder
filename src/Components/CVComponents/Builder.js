@@ -10,9 +10,9 @@ function Builder({ page, contents }) {
     return (
         <CV>
             {renderPage(
-               contents.map((content, index )=> {
+               contents.content.map((content, index )=> {
                     return (
-                        <div key={index}>
+                        <div key={index} style={{ height: "100%" }}>
                             {printLayout(content)}
                         </div>
                     )
@@ -23,7 +23,9 @@ function Builder({ page, contents }) {
     function renderPage(jsx) {
         if(page === 'letter') {
             return(
-                <LetterPage>
+                <LetterPage
+                    margin={contents.margin}
+                >
                     {jsx}
                 </LetterPage>
             ) 
@@ -36,6 +38,10 @@ function Builder({ page, contents }) {
                     <DoubleColumn
                         left={obj.left ? obj.left : 1}
                         right={obj.right ? obj.right : 1}
+                        leftBgColor = {obj.leftBgColor}
+                        rightBgColor = {obj.rightBgColor}
+                        height = {obj.height}
+                        padding = {obj.padding}
                     >
                         <div>{printSections(obj.content.left)}</div>
                         <div>{printSections(obj.content.right)}</div>

@@ -3,10 +3,11 @@ import { Section } from '../Style.style'
 import styled from 'styled-components'
 import { colors, spacing, fonts, text_sizes } from '../Style.style'
 
-function SimpleListing({ title, items }) {
+function SimpleListing({ title, theme = null, items }) {
     return (
         <React.Fragment>
-            <Section>
+            {/* If there is not theme selected */}
+            {!theme && <Section>
                 <Title>{title}</Title>
                 <List>
                     {items.map(item => {
@@ -18,7 +19,7 @@ function SimpleListing({ title, items }) {
                         )
                     })}                    
                 </List>
-            </Section>
+            </Section>}
         </React.Fragment>
     )
 }
