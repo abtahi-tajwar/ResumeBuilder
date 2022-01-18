@@ -11,7 +11,7 @@ function Compact({ cvInfo }) {
                 <div className="bg-primary">
                     <Section>
                         <Flex className="w-100 h-150">
-                            <Avatar height="128px" width="128px" src="empty.jpg" />
+                            <Avatar height="128px" width="128px" src={cvInfo.avatar} />
                         </Flex>
                     </Section>
                     <div className="w-100">
@@ -56,64 +56,50 @@ function Compact({ cvInfo }) {
                     <Section>
                         <SectionHeading>Employment</SectionHeading>
                         <List>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+                            {cvInfo.employment.map(item => <li><Listing 
+                                title={item.title}
+                                subtitle = {item.subtitle}
+                                date = {item.date}
+                                description = {item.description}
                                 color = {colors.accent}
-                            /></li>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-                                color = {colors.accent}
-                            /></li>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-                                color = {colors.accent}
-                            /></li>
+                            /></li>)}
                         </List>
                         
                     </Section>
                     <Section>
                         <SectionHeading>Education</SectionHeading>
                         <List>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+                            {cvInfo.education.map(item => <li><Listing 
+                                title={item.title}
+                                subtitle = {item.subtitle}
+                                date = {item.date}
+                                description = {item.description}
                                 color = {colors.accent}
-                            /></li>
+                            /></li>)}
                         </List>                        
                     </Section>
                     <Section>
                         <SectionHeading>Projects</SectionHeading>
                         <List>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+                            {cvInfo.projects.map(item => <li><Listing 
+                                title={item.title}
+                                subtitle = {item.subtitle}
+                                date = {item.date}
+                                description = {item.description}
                                 color = {colors.accent}
-                            /></li>
+                            /></li>)}
                         </List>                        
                     </Section>
                     <Section>
                         <SectionHeading>Certificates</SectionHeading>
                         <List>
-                            <li><Listing 
-                                title="Content Marketing Lead"
-                                subtitle = "Pipedrive, London"
-                                date = "Jan 2018 - Present"
-                                description= "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+                            {cvInfo.certificates.map(item => <li><Listing 
+                                title={item.title}
+                                subtitle = {item.subtitle}
+                                date = {item.date}
+                                description = {item.description}
                                 color = {colors.accent}
-                            /></li>
+                            /></li>)}
                         </List>                        
                     </Section>
                 </div>

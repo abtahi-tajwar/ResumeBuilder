@@ -9,6 +9,8 @@ import { Flex, Grid } from './MainStyle.style';
 import TextInput from './FormComponents/TextInput';
 import IncreasingInput from './FormComponents/v2/IncreasingInput'
 import MultipleIncreasingInput from './FormComponents/v2/MultipleIncreasingInput';
+import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
+import ImageUpload from './FormComponents/ImageUpload';
 
 function Editor2(props) {
 
@@ -37,6 +39,7 @@ function Editor2(props) {
     const template = template1
     // All form informations
     const [cvInfo, setCvInfo] = useState({
+        avatar: "empty.jpg",
         personalDetails: {
             name: 'Your Name',
             email: 'abtahitajwar@gmail.com',
@@ -58,6 +61,50 @@ function Editor2(props) {
             {
                 language: "Bangla",
                 rating: 1
+            }
+        ],
+        employment: [
+            {
+                title: "Content Marketing Lead 1",
+                subtitle: "Pipedrive, London",
+                date: "11jan - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            },
+            {
+                title: "Content Marketing Lead 2",
+                subtitle: "Pipedrive, London",
+                date: "11jan - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            },
+            {
+                title: "Content Marketing Lead 3",
+                subtitle: "Pipedrive, London",
+                date: "11 jan - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            }
+        ],
+        education: [
+            {
+                title: "American International University",
+                subtitle: "B.Sc.",
+                date: "20 Mar - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            }
+        ],
+        projects: [
+            {
+                title: "American International University",
+                subtitle: "B.Sc.",
+                date: "20 Mar - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            }
+        ],
+        certificates: [
+            {
+                title: "American International University",
+                subtitle: "B.Sc.",
+                date: "20 Mar - Present",
+                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             }
         ]
     })
@@ -125,6 +172,39 @@ function Editor2(props) {
             })
         }
     }
+    const handleGroupIncreasingInput = (index, obj, action, name) => {        
+        if(action === 'add') {
+            setCvInfo({
+                ...cvInfo,
+                [name]: [
+                    ...cvInfo[name],
+                    obj
+                ]
+            })
+        } else if(action === 'delete') {
+            setCvInfo({
+                ...cvInfo,
+                [name]: cvInfo[name].filter((item, i) => i !== index )
+            })
+        } else if(action === 'edit') {
+            console.log(index, obj, action)
+            setCvInfo({
+                ...cvInfo,
+                [name]: cvInfo[name].map((item, i) => {
+                    if(i !== index) {
+                        return item
+                    }
+                    return obj
+                })
+            })
+        }
+    }
+    const handleAvatarUpload = (src) => {
+        setCvInfo({
+            ...cvInfo,
+            avatar: src
+        })
+    }
     return (
         <div className='flex'>
             <div className='container flex-1 scroll-window full-height'>
@@ -132,7 +212,16 @@ function Editor2(props) {
                 <button onClick={handlePrint} className="btn m-1">Print</button>
                 <button onClick={pdfDownload} className="btn m-1">Download</button>
                 <Divider />
-
+                {/* Avatar Image Upload */}
+                <div className="mt-2">
+                    <h2>Upload Image</h2>
+                    <ImageUpload
+                        name="avatar"
+                        handleAvatarUpload={handleAvatarUpload}
+                        value={cvInfo.avatar}
+                    />
+                    <div className="mt-4"></div>
+                </div>
                 {/* Personal Information */}
                 <Collapsible 
                     title="Personal Details"
@@ -205,14 +294,57 @@ function Editor2(props) {
                     title="Skills & Language"
                 >
                     <IncreasingInput 
-                        name="skills"
+                        name="Skills"
                         values={cvInfo.skills}
                         handleInput={handleSkill}
                     />
                     <MultipleIncreasingInput 
-                        name="languages"
+                        name="Languages"
                         values={cvInfo.language}
                         handleInput={handleLanguage}
+                    />
+                </Collapsible>
+                {/* Employment */}
+                <Collapsible
+                    title="Employment"
+                >
+                    <IncreasingGroupInput
+                        name="employment"
+                        items={cvInfo.employment}
+                        handleItems={handleGroupIncreasingInput}
+                    />
+                </Collapsible>
+   
+                {/* Education */}
+                <Collapsible
+                    title="Education"
+                >
+                    <IncreasingGroupInput
+                        name="education"
+                        items={cvInfo.education}
+                        handleItems={handleGroupIncreasingInput}
+                    />
+                </Collapsible>
+
+                {/* Projects */}
+                <Collapsible
+                    title="Projects"
+                >
+                    <IncreasingGroupInput
+                        name="projects"
+                        items={cvInfo.projects}
+                        handleItems={handleGroupIncreasingInput}
+                    />
+                </Collapsible>
+
+                {/* Certificates */}
+                <Collapsible
+                    title="Certificates"
+                >
+                    <IncreasingGroupInput
+                        name="certificates"
+                        items={cvInfo.employment}
+                        handleItems={handleGroupIncreasingInput}
                     />
                 </Collapsible>
             </div>

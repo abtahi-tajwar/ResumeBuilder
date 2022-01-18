@@ -17,7 +17,7 @@ function MultipleIncreasingInput({ values, handleInput, name}) {
     }
     return (
         <div>
-            <h4 className="light-text">Heading Informations 1</h4>
+            <h4 className="light-text">{name}</h4>
             {values.map((item, index) => {
                 return(
                     <div className="flex fg-1 flex-align mt-1">

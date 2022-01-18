@@ -23,7 +23,7 @@ function Listing({ title, subtitle, date, description, color = "gray" }) {
                 <p><b>{date}</b></p>
             </Heading>
             <Subtitle>{subtitle}</Subtitle>
-            <p>{description}</p>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
         </Wrapper>
     );
 }
