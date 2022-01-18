@@ -1,5 +1,6 @@
 import './App.css'
 import Editor from './Components/Editor';
+import Editor2 from './Components/Editor2';
 
 function App() {
   // const componentRef  = useRef()
@@ -29,7 +30,7 @@ function App() {
       <div className="pdfDownload">
         <Template ref={componentRef}/>
       </div> */}
-      <Editor />
+      <Editor2 />
     </div>
   );
 }

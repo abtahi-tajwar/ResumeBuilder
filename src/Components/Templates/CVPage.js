@@ -5,12 +5,12 @@ import Compact from './Compact/Compact'
 
 export default class CVPage extends Component {
     render() {
-        const { page, contents } = this.props
+        const { page, contents, cvInfo } = this.props
         return (
             <div>
                 {/* <Builder page={page} contents={contents}/> */}
                 <LetterPage>
-                    <Compact />
+                    <Compact cvInfo={cvInfo} />
                 </LetterPage>
             </div>
             

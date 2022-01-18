@@ -4,7 +4,7 @@ import SkillRating from '../Components/SkillRating';
 import Listing from './Listing';
 import '../style.css'
 
-function Compact() {    
+function Compact({ cvInfo }) {    
     return (
         <div className='wrapper'>
             <DoubleColumn left="1" right="3">
@@ -18,27 +18,25 @@ function Compact() {
                         <Section>
                             <SectionHeading>Personal Details</SectionHeading>
                             <List>
-                                <li><span><i class="fas fa-envelope"></i></span> abtahitajwar@gmail.com</li>
-                                <li><span><i class="fas fa-phone"></i></span> +88 01796-391053</li>
-                                <li><span><i class="fas fa-home"></i></span> Jowar Sahara, Progati Shoroni</li>
-                                <li><span><i class="fas fa-globe"></i></span> https://abtahi-tajwar.github.io/abtahitajwar</li>
-                                <li><span><i class="fab fa-linkedin"></i></span> https://www.linkedin.com/in/abtahi-tajwar/</li>
+                                <li><span><i class="fas fa-envelope"></i></span> { cvInfo.personalDetails.email }</li>
+                                <li><span><i class="fas fa-phone"></i></span> { cvInfo.personalDetails.phone }</li>
+                                <li><span><i class="fas fa-home"></i></span> { cvInfo.personalDetails.address }</li>
+                                <li><span><i class="fas fa-globe"></i></span> { cvInfo.personalDetails.website }</li>
+                                <li><span><i class="fab fa-linkedin"></i></span> { cvInfo.personalDetails.linkedin }</li>
                             </List>
                         </Section>
                         <Section>
                             <SectionHeading>Skills</SectionHeading>
                             <DottedList>
-                                <li>HTML: Redesign website to increase traffic by 50% </li>
-                                <li>CSS: Redesign website to increase traffic by 50% Redesign website to increase</li>
-                                <li>Javascript: Redesign website to increase traffic by 50% </li>
-                                <li>PHP: Redesign website to increase traffic by 50% </li>
+                                {cvInfo.skills.map(item => <li>{item}</li>)}
                             </DottedList>
                         </Section>
                         <Section>
                             <SectionHeading>Language</SectionHeading>
                             <List>
-                                <SkillRating name="English" rating={4} total={5} color={colors.accent} />
-                                <SkillRating name="Bangla" rating={1} total={5} color={colors.accent} />
+                                {cvInfo.language.map(item => <SkillRating name={item.language} rating={item.rating} total={5} color={colors.accent} />)}
+                                {/* <SkillRating name="English" rating={4} total={5} color={colors.accent} />
+                                <SkillRating name="Bangla" rating={1} total={5} color={colors.accent} /> */}
                             </List>
                             
                         </Section>
@@ -47,7 +45,7 @@ function Compact() {
                 <div>
                     <Section>
                         <Heading>
-                            <h1>Md. Abtahi Tajwar</h1>
+                            <h1>{cvInfo.personalDetails.name}</h1>
                             <p>Fullstack Web Developer</p>
                         </Heading>
                     </Section>

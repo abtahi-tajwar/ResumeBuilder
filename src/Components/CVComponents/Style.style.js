@@ -10,6 +10,7 @@ export const text_sizes = {
 }
 export const colors = {
     primary: '#2079c7',
+    primary_hover: '#0a4a82',
     gray: '#666666',
     light_gray: '#f0f0f0',
 }
