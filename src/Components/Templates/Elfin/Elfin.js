@@ -8,6 +8,8 @@ import References from './References';
 import SkillRating from '../Components/SkillRating';
 import HtmlRender from '../Components/HtmlRender';
 import Listing from './Listing';
+import RenderSocialMedias from '../Compact/RenderSocialMedias';
+import { DottedList } from '../../MainStyle.style';
 function Elfin({ cvInfo }) {
   return (
   <Wrapper>
@@ -24,43 +26,34 @@ function Elfin({ cvInfo }) {
             </Section>
             <SectionHr theme="dark">
                 <SectionHeading>Website & Social Links</SectionHeading>
-                <List>
-                    <li><span><i class="fas fa-envelope"></i></span> { cvInfo.personalDetails.email }</li>
-                    <li><span><i class="fas fa-globe"></i></span> { cvInfo.personalDetails.website }</li>
-                    <li><span><i class="fas fa-linkedin"></i></span> { cvInfo.personalDetails.linkedin }</li>
-                </List>
+                <RenderSocialMedias items={cvInfo.personalDetails} />
             </SectionHr>
-            <SectionHr theme="dark">
-                <SectionHeading>References</SectionHeading>
-                <List>
-                    <li><References 
-                        name="Mr. Michel Robinson"
-                        subtitle="Graphics & Web Designer"
-                        contact="+88 01796-391053"
-                        email="michaelrobinson@gmail.com"
-                    /></li>
-                    <li><References 
-                        name="Mr. Michel Robinson"
-                        subtitle="Graphics & Web Designer"
-                        contact="+88 01796-391053"
-                        email="michaelrobinson@gmail.com"
-                    /></li>
-                </List>
-            </SectionHr>
-            <SectionHr theme="dark">
+            { cvInfo.skills.length > 0 && <SectionHr theme="dark">
+                <SectionHeading>Skills</SectionHeading>
+                <DottedList color="white">
+                    {cvInfo.skills.map(item => <li>{item}</li>)}
+                </DottedList>
+            </SectionHr> }
+            { cvInfo.language.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>Languages</SectionHeading>
                 <List>
                 {cvInfo.language.map(item => <SkillRating name={item.language} rating={item.rating} total={5} color="white" />)}
                 </List>
-            </SectionHr>
-            <SectionHr theme="dark">
-                <SectionHeading>Hobbies</SectionHeading>
-                <HorizontalList>
-                    <li>Football</li>
-                    <li>Cricket</li>
-                    <li>Badminton</li>
-                </HorizontalList>
-            </SectionHr>
+            </SectionHr> }
+            {cvInfo.references.length > 0 && <SectionHr theme="dark">
+                <SectionHeading>References</SectionHeading>
+                {cvInfo.references.length > 0 && 
+                <List>
+                    {cvInfo.references.map(item => <li><References 
+                        name={item.name}
+                        subtitle={item.subtitle}
+                        contact={item.phone}
+                        email={item.email}
+                    /></li>)}
+                </List> }
+            </SectionHr> }
+            
+            
           </div>
           <div style={{ padding: '20px' }}>
               <Section>

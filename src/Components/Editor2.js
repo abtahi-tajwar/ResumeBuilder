@@ -12,6 +12,7 @@ import MultipleIncreasingInput from './FormComponents/v2/MultipleIncreasingInput
 import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
 import ImageUpload from './FormComponents/ImageUpload';
 import { Editor } from '@tinymce/tinymce-react';
+import ReferencesgroupInput from './FormComponents/v2/ReferencesgroupInput';
 
 function Editor2(props) {
 
@@ -49,8 +50,14 @@ function Editor2(props) {
             phone: '+88 01796 391053',
             address: 'Jowar Sahara, Pragati Sharani',
             website: 'https://abtahi-tajwar.github.io/abtahitajwar',
+            about: `I’m a master coach, best-selling author and a passionate speaker. I’m the founder of the first women-only hedge fund, special counsellor in many corporations across the globe. I’ve found balance between work and life, now I’m a totally happy person, loving mother, inspiring speaker and writer, and firm investor, but it didn’t come easily. I've gone though hundreds of failures and complicated situations. You can use my previous experience in order not to fall into the same trap. `,
+
             linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/',
-            about: `I’m a master coach, best-selling author and a passionate speaker. I’m the founder of the first women-only hedge fund, special counsellor in many corporations across the globe. I’ve found balance between work and life, now I’m a totally happy person, loving mother, inspiring speaker and writer, and firm investor, but it didn’t come easily. I've gone though hundreds of failures and complicated situations. You can use my previous experience in order not to fall into the same trap. `
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            pinterest: '',
+            skype: ''
         },
         skills: [
             "Skill 1: This is skills 1 and it's descirption",
@@ -109,6 +116,20 @@ function Editor2(props) {
                 subtitle: "B.Sc.",
                 date: "20 Mar - Present",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
+            }
+        ],
+        references: [
+            {
+                name: "Mr. Michel Robinson",
+                subtitle: "Graphics Designer",
+                phone: "+880 1796-391053",
+                email: "michelrobinshon@gmail.com"
+            },
+            {
+                name: "Begum Rokeya",
+                subtitle: "Graphics Designer",
+                phone: "+880 1796-391053",
+                email: "begumrokeya@gmail.com"
             }
         ]
     })
@@ -289,18 +310,12 @@ function Editor2(props) {
                             placeholder="Your Personal Website (If Any).."
                         />
 
-                        <TextInput
-                            name="linkedin"
-                            key={6}
-                            value={cvInfo.personalDetails.linkedin}
-                            handleInput={handlePersonalDetails}
-                            label="LinkedIn"
-                            placeholder="Your Linkedin Information.."
-                        />
+                        
                         
                         
                     </Grid>
                     <div className="mt-2">
+                        <p>About</p>
                         <Editor
                             onInit={(evt, editor) => editorRef.current = editor}
                             value={cvInfo.personalDetails.about}
@@ -318,6 +333,60 @@ function Editor2(props) {
                             onEditorChange={handleAbout}
                         />
                     </div>
+                    <Grid
+                        cols="repeat(auto-fit, minmax(250px, 1fr))"
+                        rows="auto"
+                        gap="10px"
+                    >   
+                        <TextInput
+                            name="linkedin"
+                            key={6}
+                            value={cvInfo.personalDetails.linkedin}
+                            handleInput={handlePersonalDetails}
+                            label="LinkedIn"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="facebook"
+                            key={6}
+                            value={cvInfo.personalDetails.facebook}
+                            handleInput={handlePersonalDetails}
+                            label="Facebook"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="instagram"
+                            key={6}
+                            value={cvInfo.personalDetails.instagram}
+                            handleInput={handlePersonalDetails}
+                            label="Instagram"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="twitter"
+                            key={6}
+                            value={cvInfo.personalDetails.twitter}
+                            handleInput={handlePersonalDetails}
+                            label="Twitter"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="pinterest"
+                            key={6}
+                            value={cvInfo.personalDetails.pinterest}
+                            handleInput={handlePersonalDetails}
+                            label="Pinterest"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="skype"
+                            key={6}
+                            value={cvInfo.personalDetails.skype}
+                            handleInput={handlePersonalDetails}
+                            label="Skype"
+                            placeholder="Your Linkedin Information.."
+                        />
+                    </Grid>
                 </Collapsible>
                 {/* Skills Section */}
                 <Collapsible
@@ -374,6 +443,15 @@ function Editor2(props) {
                     <IncreasingGroupInput
                         name="certificates"
                         items={cvInfo.employment}
+                        handleItems={handleGroupIncreasingInput}
+                    />
+                </Collapsible>
+                <Collapsible
+                    title="References"
+                >
+                    <ReferencesgroupInput 
+                        name="references"
+                        items={cvInfo.references}
                         handleItems={handleGroupIncreasingInput}
                     />
                 </Collapsible>

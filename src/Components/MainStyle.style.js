@@ -72,7 +72,7 @@ export const DottedList = styled.ul`
             content: "";
             height: 8px;
             width: 8px;
-            background-color: ${colors.accent};
+            background-color: ${props => props.color ? props.color : 'white' };
             display: block;
             position: absolute;
             left: -1rem;

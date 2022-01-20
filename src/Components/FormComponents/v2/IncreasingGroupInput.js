@@ -34,7 +34,6 @@ function IncreasingGroupInput({ items, handleItems, name }) {
             handleItems(currentIndex, item, 'edit', name)
         }
         reloadCount.current = reloadCount.current + 1;
-        console.log(item)
     }, [item])
     const addData = () => {
         handleItems(0, 
