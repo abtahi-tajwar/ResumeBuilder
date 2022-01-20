@@ -11,11 +11,13 @@ import IncreasingInput from './FormComponents/v2/IncreasingInput'
 import MultipleIncreasingInput from './FormComponents/v2/MultipleIncreasingInput';
 import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
 import ImageUpload from './FormComponents/ImageUpload';
+import { Editor } from '@tinymce/tinymce-react';
 
 function Editor2(props) {
 
     /* Functions for handle pdf print and download */
     const componentRef  = useRef()
+    const editorRef = useRef(null);
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })
@@ -42,11 +44,13 @@ function Editor2(props) {
         avatar: "empty.jpg",
         personalDetails: {
             name: 'Your Name',
+            subtitle: 'Web Developer',
             email: 'abtahitajwar@gmail.com',
             phone: '+88 01796 391053',
             address: 'Jowar Sahara, Pragati Sharani',
             website: 'https://abtahi-tajwar.github.io/abtahitajwar',
-            linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/'
+            linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/',
+            about: `I’m a master coach, best-selling author and a passionate speaker. I’m the founder of the first women-only hedge fund, special counsellor in many corporations across the globe. I’ve found balance between work and life, now I’m a totally happy person, loving mother, inspiring speaker and writer, and firm investor, but it didn’t come easily. I've gone though hundreds of failures and complicated situations. You can use my previous experience in order not to fall into the same trap. `
         },
         skills: [
             "Skill 1: This is skills 1 and it's descirption",
@@ -108,7 +112,15 @@ function Editor2(props) {
             }
         ]
     })
-
+    const handleAbout = () => {
+        setCvInfo({
+            ...cvInfo,
+            personalDetails: {
+                ...cvInfo.personalDetails,
+                about: editorRef.current.getContent()
+            }
+        })
+    }
     // Form Handling functions
     const handlePersonalDetails = (e) => {
         setCvInfo({
@@ -288,6 +300,24 @@ function Editor2(props) {
                         
                         
                     </Grid>
+                    <div className="mt-2">
+                        <Editor
+                            onInit={(evt, editor) => editorRef.current = editor}
+                            value={cvInfo.personalDetails.about}
+                            init={{
+                                height: 200,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste code help wordcount'
+                                ],
+                                toolbar: 'undo redo | formatselect | bold italic backcolor | bullist numlist ',
+                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            }}
+                            onEditorChange={handleAbout}
+                        />
+                    </div>
                 </Collapsible>
                 {/* Skills Section */}
                 <Collapsible

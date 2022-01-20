@@ -47,7 +47,8 @@ function IncreasingGroupInput({ items, handleItems, name }) {
             "add", name)
     }
     const removeData = (e, index) => {
-        handleItems(index, "", "delete",name)
+        console.log("Remove data" + index)
+        handleItems(index, "", "delete", name)
     }
     const handleDataSelect = (index) => {
         setItem(items[index])
@@ -117,7 +118,7 @@ function IncreasingGroupInput({ items, handleItems, name }) {
                             </div>
                             <div 
                                 className="close_icon" 
-                                onClick={() => removeData(index)}
+                                onClick={(event) => removeData(event, index)}
                             >
                                 <AiFillCloseCircle style={{pointerEvents: 'none'}}/>
                             </div>                        

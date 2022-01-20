@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Builder from '../CVComponents/Builder'
 import { LetterPage } from '../CVComponents/Style.style'
 import Compact from './Compact/Compact'
+import Elfin from './Elfin/Elfin'
 
 export default class CVPage extends Component {
     render() {
@@ -10,7 +11,7 @@ export default class CVPage extends Component {
             <div>
                 {/* <Builder page={page} contents={contents}/> */}
                 <LetterPage>
-                    <Compact cvInfo={cvInfo} />
+                    <Elfin cvInfo={cvInfo} />
                 </LetterPage>
             </div>
             

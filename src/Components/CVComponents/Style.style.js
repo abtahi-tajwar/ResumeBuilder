@@ -32,7 +32,7 @@ export const CV = styled.div`
 `
 export const LetterPage = styled.div`
     padding: ${props => props.margin === 'auto' ? '0.4in 0.6in 0.6in 0.6in' : props.margin};
-    height: ${792 * 1}pt;
+    height: minmax(${792 * 1}pt, auto);
     width: ${612 * 1}pt;
     background-color: ${props => props.bgColor};
     box-sizing: border-box;    
