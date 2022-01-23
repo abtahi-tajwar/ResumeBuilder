@@ -5,9 +5,8 @@ import { template1 } from './Templates';
 import jsPDF from 'jspdf';
 import { Divider } from './CVComponents/Style.style';
 import Collapsible from './FormComponents/Collapsible';
-import { Flex, Grid } from './MainStyle.style';
+import { Grid } from './MainStyle.style';
 import TextInput from './FormComponents/TextInput';
-import IncreasingInput from './FormComponents/v2/IncreasingInput'
 import MultipleIncreasingInput from './FormComponents/v2/MultipleIncreasingInput';
 import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
 import ImageUpload from './FormComponents/ImageUpload';
@@ -27,15 +26,21 @@ function Editor2() {
     const pdfDownload = e => {
         e.preventDefault()
         let doc = new jsPDF({
-        orientation: "portrait",
-        unit: "pt",
-        format: 'letter'
+            orientation: "portrait",
+            unit: "px",
+            format: 'letter',
         });
         console.log(doc.internal.pageSize.width);
+        let scaleFactor = 0.565;
+        let width = document.querySelector(".pdfDownload").getBoundingClientRect().width
+        let height = document.querySelector(".pdfDownload").getBoundingClientRect().height
+        document.querySelector(".pdfDownload").style.transformOrigin = `top left`
+        document.querySelector(".pdfDownload").style.transform = `scale(${scaleFactor})`
         doc.html(document.querySelector(".pdfDownload"), {
-        callback: () => {
-            doc.save('resume.pdf');
-        }
+            callback: () => {
+                doc.save('resume.pdf');
+            document.querySelector(".pdfDownload").style.transform = `scale(1)`
+            }
         });
     }
     /* Functions for handle pdf print and download */
@@ -88,21 +93,21 @@ function Editor2() {
         ],
         employment: [
             {
-                title: "Content Marketing Lead 1",
+                title: "Content Marketing Lead",
                 subtitle: "Pipedrive, London",
-                date: "11jan - Present",
+                date: "11 JAN - Present",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             },
             {
-                title: "Content Marketing Lead 2",
-                subtitle: "Pipedrive, London",
-                date: "11jan - Present",
+                title: "Web Developer",
+                subtitle: "Chittagong, Bangladesh",
+                date: "14 MAR - 13 DEC",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             },
             {
-                title: "Content Marketing Lead 3",
+                title: "Junior Web Developer",
                 subtitle: "Pipedrive, London",
-                date: "11 jan - Present",
+                date: "1 FEB - 22 MAR",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             }
         ],
@@ -116,16 +121,16 @@ function Editor2() {
         ],
         projects: [
             {
-                title: "American International University",
-                subtitle: "B.Sc.",
-                date: "20 Mar - Present",
+                title: "Online CV MAker",
+                subtitle: "https://github.com/abtahi-tajwar/ResumeBuilder",
+                date: "20 MAR - 29 MAR",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             }
         ],
         certificates: [
             {
-                title: "American International University",
-                subtitle: "B.Sc.",
+                title: "Expert Reactjs Developer Full Course",
+                subtitle: "React js, Javascript",
                 date: "20 Mar - Present",
                 description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
             }
@@ -455,7 +460,7 @@ function Editor2() {
                 >
                     <IncreasingGroupInput
                         name="certificates"
-                        items={cvInfo.employment}
+                        items={cvInfo.certificates}
                         handleItems={handleGroupIncreasingInput}
                     />
                 </Collapsible>
@@ -470,7 +475,7 @@ function Editor2() {
                 </Collapsible>
             </div>
             <div className="scroll-window full-height">
-                <div className="pdfDownload ">
+                <div className="pdfDownload">
                     <CVPage 
                         ref={componentRef}
                         page="letter"

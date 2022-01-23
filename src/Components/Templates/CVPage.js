@@ -10,7 +10,7 @@ export default class CVPage extends Component {
         console.log("CVPage")
         const { page, contents, cvInfo, theme } = this.props
         return (
-            <div>
+            <div className="pdfDownload_2">
                 {/* <Builder page={page} contents={contents}/> */}
                 <LetterPage>
                     {theme.toLowerCase() === 'compact' && <Compact cvInfo={cvInfo} /> }

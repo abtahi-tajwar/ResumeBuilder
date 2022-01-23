@@ -86,9 +86,9 @@ function Elfin({ cvInfo }) {
                 </SectionHr>
               }
               {
-                  cvInfo.employment.length > 0 &&
+                  cvInfo.projects.length > 0 &&
                     <SectionHr>
-                        <SectionHeading>Education</SectionHeading>
+                        <SectionHeading>Projects</SectionHeading>
                         {cvInfo.projects.map(item => 
                             <Listing 
                                 title={item.title}
@@ -99,19 +99,22 @@ function Elfin({ cvInfo }) {
                         )}
                     </SectionHr>
               }
+              {cvInfo.education.length > 0 &&
+                <SectionHr>
+                    <SectionHeading>Education</SectionHeading>
+                    {cvInfo.education.map(item => 
+                        <Listing 
+                            title={item.title}
+                            subtitle={item.subtitle}
+                            date={item.date}
+                            description={item.description}
+                        />
+                    )}
+                </SectionHr>
+                }  
+            {cvInfo.certificates.length > 0 && 
               <SectionHr>
-                  <SectionHeading>Education</SectionHeading>
-                  {cvInfo.education.map(item => 
-                    <Listing 
-                        title={item.title}
-                        subtitle={item.subtitle}
-                        date={item.date}
-                        description={item.description}
-                    />
-                  )}
-              </SectionHr>
-              <SectionHr>
-                  <SectionHeading>Education</SectionHeading>
+                  <SectionHeading>Certificates</SectionHeading>
                   {cvInfo.certificates.map(item => 
                     <Listing 
                         title={item.title}
@@ -121,6 +124,7 @@ function Elfin({ cvInfo }) {
                     />
                   )}
               </SectionHr>
+            }
           </div>
       </DoubleColumn>
   </Wrapper>
