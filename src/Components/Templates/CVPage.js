@@ -7,12 +7,16 @@ import Serif from './Serif/Serif'
 
 export default class CVPage extends Component {
     render() {
-        const { page, contents, cvInfo } = this.props
+        console.log("CVPage")
+        const { page, contents, cvInfo, theme } = this.props
         return (
             <div>
                 {/* <Builder page={page} contents={contents}/> */}
                 <LetterPage>
-                    <Compact cvInfo={cvInfo} />
+                    {theme.toLowerCase() === 'compact' && <Compact cvInfo={cvInfo} /> }
+                    {theme.toLowerCase() === 'elfin' && <Elfin cvInfo={cvInfo}/> }
+                    {theme.toLowerCase() === 'serif' && <Serif cvInfo={cvInfo} /> }
+                    {/* <Elfin cvInfo={cvInfo} /> */}
                 </LetterPage>
             </div>
         )

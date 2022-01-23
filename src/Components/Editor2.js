@@ -13,12 +13,14 @@ import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
 import ImageUpload from './FormComponents/ImageUpload';
 import { Editor } from '@tinymce/tinymce-react';
 import ReferencesgroupInput from './FormComponents/v2/ReferencesgroupInput';
+import { useParams } from 'react-router-dom';
 
-function Editor2(props) {
+function Editor2() {
 
     /* Functions for handle pdf print and download */
     const componentRef  = useRef()
     const editorRef = useRef(null);
+    const { theme } = useParams()
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })
@@ -42,7 +44,7 @@ function Editor2(props) {
     const template = template1
     // All form informations
     const [cvInfo, setCvInfo] = useState({
-        avatar: "empty.jpg",
+        avatar: "../empty.jpg",
         personalDetails: {
             name: 'Your Name',
             subtitle: 'Web Developer',
@@ -473,7 +475,8 @@ function Editor2(props) {
                         ref={componentRef}
                         page="letter"
                         contents={template}   
-                        cvInfo={cvInfo}                         
+                        cvInfo={cvInfo}     
+                        theme={theme}                    
                     />
                 </div>
             </div>

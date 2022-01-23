@@ -1,6 +1,8 @@
 import './App.css'
 import Editor from './Components/Editor';
 import Editor2 from './Components/Editor2';
+import Home from './Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   // const componentRef  = useRef()
@@ -24,14 +26,21 @@ function App() {
   // }
 
   return (
-    <div className="App">
-      {/* <button onClick={handlePrint}>Print</button>
-      <button onClick={pdfDownload}>Download</button>
-      <div className="pdfDownload">
-        <Template ref={componentRef}/>
-      </div> */}
-      <Editor2 />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        {/* <button onClick={handlePrint}>Print</button>
+        <button onClick={pdfDownload}>Download</button>
+        <div className="pdfDownload">
+          <Template ref={componentRef}/>
+        </div> */}
+        <Routes>
+          <Route path="/dashboard" element={<Home/>} />
+          <Route path="/editor/:theme" element={<Editor2 />} />
+        </Routes>
+        <Home />
+        {/* <Editor2 /> */}
+      </div>
+    </BrowserRouter>
   );
 }
 
