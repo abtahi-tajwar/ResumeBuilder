@@ -32,14 +32,23 @@ function Editor2() {
         });
         console.log(doc.internal.pageSize.width);
         let scaleFactor = 0.565;
-        let width = document.querySelector(".pdfDownload").getBoundingClientRect().width
-        let height = document.querySelector(".pdfDownload").getBoundingClientRect().height
         document.querySelector(".pdfDownload").style.transformOrigin = `top left`
         document.querySelector(".pdfDownload").style.transform = `scale(${scaleFactor})`
+        document.querySelectorAll("i").forEach(item => {
+            item.style.display = 'none'
+            item.insertAdjacentHTML('afterend', '<span class="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
+        })
         doc.html(document.querySelector(".pdfDownload"), {
             callback: () => {
                 doc.save('resume.pdf');
-            document.querySelector(".pdfDownload").style.transform = `scale(1)`
+                document.querySelector(".pdfDownload").style.transform = `scale(1)`
+                document.querySelectorAll("i").forEach(item => {
+                    item.style.display = 'inline-block'
+                })
+                document.querySelectorAll(".temporaryAdjacentHtmlForPdfDownload").forEach(item => {
+                    item.style.display = 'none'
+                })
+
             }
         });
     }
