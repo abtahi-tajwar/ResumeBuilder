@@ -8,13 +8,19 @@ function SelectResume() {
     <Section>
         <GridGallery width="300px">
             <Link to="/editor/compact">
-                <Thumbnail src="img/Compact.png" />
+                <Thumbnail name="Compact" >
+                    <img src="img/Compact.png" />
+                </Thumbnail> 
             </Link>
             <Link to="/editor/elfin">
-                <Thumbnail src="img/Elfin.png" />
+                <Thumbnail name="Elfin" >
+                    <img src="img/Elfin.png" />
+                </Thumbnail> 
             </Link>
             <Link to="/editor/serif">
-                <Thumbnail src="img/Serif.png" />
+                <Thumbnail name="Serif" >
+                    <img src="img/Serif.png" />
+                </Thumbnail> 
             </Link>
         </GridGallery>
     </Section>
