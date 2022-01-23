@@ -8,7 +8,7 @@ import References from './References';
 import SkillRating from '../Components/SkillRating';
 import HtmlRender from '../Components/HtmlRender';
 import Listing from './Listing';
-import RenderSocialMedias from '../Compact/RenderSocialMedias';
+import RenderSocialMedias from '../Components/RenderSocialMedias';
 import { DottedList } from '../../MainStyle.style';
 function Elfin({ cvInfo }) {
   return (
@@ -31,7 +31,7 @@ function Elfin({ cvInfo }) {
             { cvInfo.skills.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>Skills</SectionHeading>
                 <DottedList color="white">
-                    {cvInfo.skills.map(item => <li>{item}</li>)}
+                    {cvInfo.skills.map(item => <li>{item.skill}</li>)}
                 </DottedList>
             </SectionHr> }
             { cvInfo.language.length > 0 && <SectionHr theme="dark">

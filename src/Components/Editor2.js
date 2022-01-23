@@ -53,6 +53,7 @@ function Editor2(props) {
             about: `I’m a master coach, best-selling author and a passionate speaker. I’m the founder of the first women-only hedge fund, special counsellor in many corporations across the globe. I’ve found balance between work and life, now I’m a totally happy person, loving mother, inspiring speaker and writer, and firm investor, but it didn’t come easily. I've gone though hundreds of failures and complicated situations. You can use my previous experience in order not to fall into the same trap. `,
 
             linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/',
+            github: 'https://www.github.com/',
             facebook: '',
             instagram: '',
             twitter: '',
@@ -60,9 +61,18 @@ function Editor2(props) {
             skype: ''
         },
         skills: [
-            "Skill 1: This is skills 1 and it's descirption",
-            "Skill 2: This is skills 2 and it's descirption",
-            "Skill 3: This is skills 3 and it's descirption"
+            {
+                skill: "Problem Solving",
+                rating: 75
+            },
+            {
+                skill: "Web Design",
+                rating: 48
+            },
+            {
+                skill: "Programming",
+                rating: 94
+            }
         ],
         language: [
             {
@@ -152,17 +162,16 @@ function Editor2(props) {
             }
         })
     }
-    const handleSkill = (index, skill, action) => {
+    const handleSkill = (index, obj, action) => {
         if(action === 'add') {
             setCvInfo({
                 ...cvInfo,
                 skills: [
                     ...cvInfo.skills,
-                    skill
+                    obj
                 ]
             })
         } else if(action === 'delete') {
-            console.log(cvInfo.skills)
             setCvInfo({
                 ...cvInfo,
                 skills: cvInfo.skills.filter((item, i) => i !== index )
@@ -174,7 +183,7 @@ function Editor2(props) {
                     if(i !== index) {
                         return item
                     }
-                    return skill
+                    return obj
                 })
             })
         }
@@ -392,15 +401,17 @@ function Editor2(props) {
                 <Collapsible
                     title="Skills & Language"
                 >
-                    <IncreasingInput 
+                    <MultipleIncreasingInput 
                         name="Skills"
                         values={cvInfo.skills}
                         handleInput={handleSkill}
+                        keys={["skill", "rating"]}
                     />
                     <MultipleIncreasingInput 
                         name="Languages"
                         values={cvInfo.language}
                         handleInput={handleLanguage}
+                        keys={["language", "rating"]}
                     />
                 </Collapsible>
                 {/* Employment */}

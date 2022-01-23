@@ -28,12 +28,12 @@ export const Avatar = styled.img`
     height: ${props => props.height ? props.height : '128px'};
     width: ${props => props.width ? props.width : '128px'};
     border-radius: 50%;
+    object-fit: cover;
 `
 export const List = styled.ul`
-    style-style-type: none;
+    list-style-type: none;
     li {
         margin-bottom: 10px;
-        display: flex;
         align-items: center;
         gap: 5px;
         span {

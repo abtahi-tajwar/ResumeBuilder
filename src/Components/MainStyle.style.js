@@ -23,6 +23,7 @@ export const Flex = styled.div.attrs(props => ({
     display: flex;
     justify-content: ${props => props.justify ? props.justify : 'center'};
     align-items: ${props => props.align ? props.align : 'center'};
+    ${props => props.gap && `gap: ${props.gap}`};
 `
 export const Grid = styled.div.attrs(props => ({
     className: props.className

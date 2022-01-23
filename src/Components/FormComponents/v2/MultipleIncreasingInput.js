@@ -1,12 +1,23 @@
 import React from 'react';
 
-function MultipleIncreasingInput({ values, handleInput, name}) {
+function MultipleIncreasingInput({ values, handleInput, name, keys}) {
     const handleLangugaeEdit = (event, index) => {
         const obj = { language: event.target.value, rating: values[index].rating }
         handleInput(index, obj, "edit")
     }
     const handleRatingEdit = (event, index) => {
         const obj = { language: values[index].language, rating: event.target.value }
+        handleInput(index, obj, "edit")
+    }
+    const handleEdit = (event, index, currentKey) => {
+        const obj = {}
+        keys.forEach(key => {
+            if(key === currentKey) {
+                obj[key] = event.target.value
+                return
+            } 
+            obj[key] = values[index][key]
+        });
         handleInput(index, obj, "edit")
     }
     const removeItem = (event, index) => {
@@ -17,28 +28,28 @@ function MultipleIncreasingInput({ values, handleInput, name}) {
     }
     return (
         <div>
-            <h4 className="light-text">{name}</h4>
+            <h4 className="light-text mt-3" style={{fontSize: '1.3rem'}}>{name}</h4>
             {values.map((item, index) => {
                 return(
                     <div className="flex fg-1 flex-align mt-1">
-                        <input 
-                            name={name+'_language_'+index}
-                            key={index}
-                            value={item.language}
-                            onChange={event => handleLangugaeEdit(event, index)}
-                            className="text-input_sm flex-1"
-                        />
-                        <input 
-                            name={name+'_rating_'+index}
-                            key={index}
-                            value={item.rating}
-                            onChange={event => handleRatingEdit(event, index)}
-                            className="text-input_sm flex-1"
-                        />
+                        {keys.map(key => 
+                            <div className="flex-1">
+                                <p>{key}</p>
+                                <input 
+                                    name={`${name}_${key}_${index}`}
+                                    key={index}
+                                    value={item[key]}
+                                    onChange={event => handleEdit(event, index, key)}
+                                    className="text-input_sm w-100"
+                                    style={{boxSizing: 'border-box'}}
+                                />
+                            </div>
+                        )}
                         <button 
                             onClick={event => removeItem(event, index)}
                             data-removeIndex={index}
                             className="circle_icon danger"
+                            style={{alignSelf: "flex-end"}}
                         > - </button>
                     </div>
                 )

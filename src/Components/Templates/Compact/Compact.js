@@ -28,7 +28,7 @@ function Compact({ cvInfo }) {
                         <Section>
                             <SectionHeading>Skills</SectionHeading>
                             <DottedList>
-                                {cvInfo.skills.map(item => <li>{item}</li>)}
+                                {cvInfo.skills.map(item => <li>{item.skill}</li>)}
                             </DottedList>
                         </Section>
                         <Section>
