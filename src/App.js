@@ -34,8 +34,8 @@ function App() {
           <Template ref={componentRef}/>
         </div> */}
         <Routes>
-          <Route path="/dashboard" element={<Home/>} />
-          <Route path="/editor/:theme" element={<Editor2 />} />
+          <Route path="/" exact element={<Home/>} />
+          <Route path="/editor/:theme" exact element={<Editor2 />} />
         </Routes>
         <Home />
         {/* <Editor2 /> */}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SkillRating from '../Components/SkillRating';
 import Listing from './Listing';
 import '../style.css'
+import Icon from '../../Icons/Icon';
 
 function Compact({ cvInfo }) {    
     return (
@@ -18,11 +19,11 @@ function Compact({ cvInfo }) {
                         <Section>
                             <SectionHeading>Personal Details</SectionHeading>
                             <List>
-                                <li><span><i class="fas fa-envelope"></i></span> { cvInfo.personalDetails.email }</li>
-                                <li><span><i class="fas fa-phone"></i></span> { cvInfo.personalDetails.phone }</li>
-                                <li><span><i class="fas fa-home"></i></span> { cvInfo.personalDetails.address }</li>
-                                <li><span><i class="fas fa-globe"></i></span> { cvInfo.personalDetails.website }</li>
-                                <li><span><i class="fab fa-linkedin"></i></span> { cvInfo.personalDetails.linkedin }</li>
+                                <li><Icon icon="email" /> { cvInfo.personalDetails.email }</li>
+                                <li><Icon icon="phone" /> { cvInfo.personalDetails.phone }</li>
+                                <li><Icon icon="home" /> { cvInfo.personalDetails.address }</li>
+                                <li><Icon icon="web" /> { cvInfo.personalDetails.website }</li>
+                                <li><Icon icon="linkedin" /> { cvInfo.personalDetails.linkedin }</li>
                             </List>
                         </Section>
                         <Section>

@@ -9,6 +9,7 @@ import SkillRating from '../Components/SkillRating';
 import { List } from '../ThemeStyles.style';
 import Listing from './Listing';
 import RenderSocialMedias from '../Components/RenderSocialMedias';
+import Icon from '../../Icons/Icon';
 function Serif({ cvInfo }) {
   return <Wrapper>
         <Flex justify="space-between" align="flex-end" style={{ paddingBottom: spacings.sectionMargin }}>
@@ -29,21 +30,21 @@ function Serif({ cvInfo }) {
                     <SectionHeading>Contact Me</SectionHeading>
                     <BorderedList>
                         {cvInfo.personalDetails.phone !== '' && <li>
-                            <i class="bi bi-telephone-forward"></i>
+                            <Icon icon="phone" size="24px"/>
                             <div>
                                 <b>Contact</b>
                                 <p>{cvInfo.personalDetails.phone}</p>
                             </div>
                         </li>}
                         {cvInfo.personalDetails.email !== '' && <li>
-                            <i class="bi bi-envelope-open"></i>
+                            <Icon icon="email" size="24px"/>
                             <div>
                                 <b>Email</b>
                                 <p>{cvInfo.personalDetails.email}</p>
                             </div>
                         </li>}
                         {cvInfo.personalDetails.website !== '' && <li>
-                            <i class="bi bi-globe"></i>
+                            <Icon icon="web" size="24px"/>
                             <div>
                                 <b>Web</b>
                                 <p>{cvInfo.personalDetails.website}</p>
@@ -58,7 +59,7 @@ function Serif({ cvInfo }) {
                 <Section>
                     <SectionHeading>Social</SectionHeading>
                     <SocialMedia>
-                        <RenderSocialMedias items={cvInfo.personalDetails}/>
+                        <RenderSocialMedias items={cvInfo.personalDetails} light={false} />
                     </SocialMedia>
                 </Section>
                 {cvInfo.language.length > 0 && <Section>

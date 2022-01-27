@@ -10,6 +10,8 @@ import HtmlRender from '../Components/HtmlRender';
 import Listing from './Listing';
 import RenderSocialMedias from '../Components/RenderSocialMedias';
 import { DottedList } from '../../MainStyle.style';
+import Icon from '../../Icons/Icon';
+
 function Elfin({ cvInfo }) {
   return (
   <Wrapper>
@@ -26,7 +28,7 @@ function Elfin({ cvInfo }) {
             </Section>
             <SectionHr theme="dark">
                 <SectionHeading>Website & Social Links</SectionHeading>
-                <RenderSocialMedias items={cvInfo.personalDetails} />
+                <RenderSocialMedias items={cvInfo.personalDetails}/>
             </SectionHr>
             { cvInfo.skills.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>Skills</SectionHeading>
@@ -64,9 +66,9 @@ function Elfin({ cvInfo }) {
                         </div>
                         <div>
                             <List>
-                            <li><span><i class="fas fa-envelope"></i></span> { cvInfo.personalDetails.email }</li>
-                                    <li><span><i class="fas fa-phone"></i></span> { cvInfo.personalDetails.phone }</li>
-                                    <li><span><i class="fas fa-home"></i></span> { cvInfo.personalDetails.address }</li>
+                            <li><Icon icon="email" /> { cvInfo.personalDetails.email }</li>
+                            <li><Icon icon="phone" /> { cvInfo.personalDetails.phone }</li>
+                            <li><Icon icon="home" /> { cvInfo.personalDetails.address }</li>
                             </List>
                         </div>
                 </Flex>
