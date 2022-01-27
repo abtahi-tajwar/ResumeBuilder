@@ -32,16 +32,24 @@ function Editor2() {
         });
         console.log(doc.internal.pageSize.width);
         let scaleFactor = 0.565;
-        document.querySelector(".pdfDownload").style.transformOrigin = `top left`
-        document.querySelector(".pdfDownload").style.transform = `scale(${scaleFactor})`
+        const pdfDom = document.querySelector(".pdfDownload")
+        pdfDom.style.transformOrigin = `top left`
+        pdfDom.style.transform = `scale(${scaleFactor})`
         document.querySelectorAll("i").forEach(item => {
             item.style.display = 'none'
             item.insertAdjacentHTML('afterend', '<span class="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
         })
-        doc.html(document.querySelector(".pdfDownload"), {
+        // html2canvas(pdfDom).then(canvas => {
+        //     const imgData = canvas.toDataURL('image/png');
+        //     const pdf = new jsPDF();
+        //     pdf.addImage(imgData, 'JPEG', 0, 0);
+        //     // pdf.output('dataurlnewwindow');
+        //     pdf.save("download.pdf");
+        // })
+        doc.html(pdfDom, {
             callback: () => {
                 doc.save('resume.pdf');
-                document.querySelector(".pdfDownload").style.transform = `scale(1)`
+                pdfDom.style.transform = `scale(1)`
                 document.querySelectorAll("i").forEach(item => {
                     item.style.display = 'inline-block'
                 })
@@ -490,8 +498,10 @@ function Editor2() {
                         page="letter"
                         contents={template}   
                         cvInfo={cvInfo}     
-                        theme={theme}                    
+                        theme={theme}  
+                        id={'template'}                  
                     />
+                                      
                 </div>
             </div>
         </div>

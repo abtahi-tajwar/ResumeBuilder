@@ -8,14 +8,18 @@
     "@testing-library/user-event": "^12.8.3",
     "@tinymce/tinymce-react": "^3.13.0",
     "draft-js": "^0.11.7",
+    "html2canvas": "^1.4.1",
+    "html2pdf": "^0.0.11",
     "jspdf": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-html2pdf": "^1.0.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^4.0.3",
     "react-to-print": "^2.13.0",
     "styled-components": "^5.3.1",
+    "thwack": "^0.6.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

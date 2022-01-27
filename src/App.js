@@ -34,10 +34,9 @@ function App() {
           <Template ref={componentRef}/>
         </div> */}
         <Routes>
-          <Route path="/" exact element={<Home/>} />
+          <Route path="/*" exact element={<Home/>} />
           <Route path="/editor/:theme" exact element={<Editor2 />} />
         </Routes>
-        <Home />
         {/* <Editor2 /> */}
       </div>
     </BrowserRouter>

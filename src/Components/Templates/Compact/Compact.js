@@ -19,11 +19,11 @@ function Compact({ cvInfo }) {
                         <Section>
                             <SectionHeading>Personal Details</SectionHeading>
                             <List>
-                                <li><Icon icon="email" /> { cvInfo.personalDetails.email }</li>
-                                <li><Icon icon="phone" /> { cvInfo.personalDetails.phone }</li>
-                                <li><Icon icon="home" /> { cvInfo.personalDetails.address }</li>
-                                <li><Icon icon="web" /> { cvInfo.personalDetails.website }</li>
-                                <li><Icon icon="linkedin" /> { cvInfo.personalDetails.linkedin }</li>
+                                <li><Icon icon="email" color={{r: 43, g: 138, b: 186}} /> { cvInfo.personalDetails.email }</li>
+                                <li><Icon icon="phone" color={{r: 43, g: 138, b: 186}} /> { cvInfo.personalDetails.phone }</li>
+                                <li><Icon icon="home" color={{r: 43, g: 138, b: 186}} /> { cvInfo.personalDetails.address }</li>
+                                <li><Icon icon="web" color={{r: 43, g: 138, b: 186}} /> { cvInfo.personalDetails.website }</li>
+                                <li><Icon icon="linkedin" color={{r: 43, g: 138, b: 186}} /> { cvInfo.personalDetails.linkedin }</li>
                             </List>
                         </Section>
                         <Section>
