@@ -1,14 +1,6 @@
 import React from 'react';
 
 function MultipleIncreasingInput({ values, handleInput, name, keys}) {
-    const handleLangugaeEdit = (event, index) => {
-        const obj = { language: event.target.value, rating: values[index].rating }
-        handleInput(index, obj, "edit")
-    }
-    const handleRatingEdit = (event, index) => {
-        const obj = { language: values[index].language, rating: event.target.value }
-        handleInput(index, obj, "edit")
-    }
     const handleEdit = (event, index, currentKey) => {
         const obj = {}
         keys.forEach(key => {
@@ -18,13 +10,13 @@ function MultipleIncreasingInput({ values, handleInput, name, keys}) {
             } 
             obj[key] = values[index][key]
         });
-        handleInput(index, obj, "edit")
+        handleInput(index, obj, "edit", name)
     }
     const removeItem = (event, index) => {
-        handleInput(index, event.target.value, "delete")
+        handleInput(index, event.target.value, "delete", name)
     }
     const addNewItem = () => {
-        handleInput(0, {language: "", rating: "" }, "add")
+        handleInput(0, {language: "", rating: "" }, "add", name)
     }
     return (
         <div>

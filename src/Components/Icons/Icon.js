@@ -11,40 +11,12 @@ import Web from '../../assets/icons/world-wide-web.png';
 import Home  from '../../assets/icons/home.png';
 import Phone  from '../../assets/icons/phone-call.png';
 import styled from 'styled-components';
-import BlobIcon from './BlobIcon';
 
 function Icon({ icon = "email", size=16, light=false, color=false }) {
 
   const canvasRef = useRef(null)
   const imgTag = useRef()
-  function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-  function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-  }
-  function isBase64(str) {
-    if(!str) {
-      return false
-    }
-    if (str ==='' || str.trim() ===''){ return false; }
-    try {
-        return btoa(atob(str)) == str;
-    } catch (err) {
-        return false;
-    }
-  }
+  
   const [icons, setIcons] = useState({
     email: Email,
     facebook: Facebook,
@@ -59,6 +31,15 @@ function Icon({ icon = "email", size=16, light=false, color=false }) {
     phone: Phone
   })
 
+  /* Here this use effect is used because
+    While converting to pdf, css filter does not work, so logo colors cannot be changed based on need. So,
+      -> Contained the image data into an image object
+      -> Drawn the image object into the canvas
+      -> Changed the pixel colors based on parameter passed. Example: color value
+      -> Re encoded the image into <img/> tag again.
+      
+      !! Problem solved
+  */
   useEffect(() => {
     const ctx = canvasRef.current.getContext("2d")
     const image = new Image(size, size)
@@ -84,6 +65,7 @@ function Icon({ icon = "email", size=16, light=false, color=false }) {
           data[i + 2] = color.b
         }
       }
+
       ctx.putImageData(imgData, 0, 0)
       imgTag.current.src = canvasRef.current.toDataURL()
     }

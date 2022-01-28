@@ -4,6 +4,7 @@ import SkillRating from '../Components/SkillRating';
 import Listing from './Listing';
 import '../style.css'
 import Icon from '../../Icons/Icon';
+import HtmlRender from '../Components/HtmlRender';
 
 function Compact({ cvInfo }) {    
     return (
@@ -52,7 +53,9 @@ function Compact({ cvInfo }) {
                     </Section>
                     <Section>
                         <SectionHeading>About Me</SectionHeading>
-                        <p>Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach.</p>
+                        <HtmlRender>
+                            {cvInfo.personalDetails.about}
+                        </HtmlRender>
                     </Section>
                     <Section>
                         <SectionHeading>Employment</SectionHeading>

@@ -14,7 +14,7 @@ function Home() {
             />
             <Body>
                 <Routes>
-                   <Route path="/create-resume" element={<SelectResume />} /> 
+                   <Route path="/" element={<SelectResume />} /> 
                    <Route path="/about" element={<About />} /> 
                 </Routes>
             </Body>

@@ -7,7 +7,7 @@ function Sidenav({ name, logo }) {
       {logo && <CompanyLogo src={logo} alt="Company Logo" />}
       <CompanyName>{name}</CompanyName>
       <Menu>
-          <Link to="/create-resume"><li>Build Resume</li></Link>
+          <Link to="/"><li>Build Resume</li></Link>
           <Link to="/about"><li>About</li></Link>
       </Menu>
   </Wrapper>;

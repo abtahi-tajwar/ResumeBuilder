@@ -13,6 +13,9 @@ import ImageUpload from './FormComponents/ImageUpload';
 import { Editor } from '@tinymce/tinymce-react';
 import ReferencesgroupInput from './FormComponents/v2/ReferencesgroupInput';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSingleInfo, setGroupInfo, setAvatar } from '../redux/cvInfo.js/slice';
+
 
 function Editor2() {
 
@@ -20,6 +23,8 @@ function Editor2() {
     const componentRef  = useRef()
     const editorRef = useRef(null);
     const { theme } = useParams()
+    const dispatch = useDispatch()
+
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })
@@ -39,13 +44,6 @@ function Editor2() {
             item.style.display = 'none'
             item.insertAdjacentHTML('afterend', '<span class="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
         })
-        // html2canvas(pdfDom).then(canvas => {
-        //     const imgData = canvas.toDataURL('image/png');
-        //     const pdf = new jsPDF();
-        //     pdf.addImage(imgData, 'JPEG', 0, 0);
-        //     // pdf.output('dataurlnewwindow');
-        //     pdf.save("download.pdf");
-        // })
         doc.html(pdfDom, {
             callback: () => {
                 doc.save('resume.pdf');
@@ -64,212 +62,32 @@ function Editor2() {
 
     // Template for dynamic building, currenlty is not in use
     const template = template1
-    // All form informations
-    const [cvInfo, setCvInfo] = useState({
-        avatar: "../empty.jpg",
-        personalDetails: {
-            name: 'Your Name',
-            subtitle: 'Web Developer',
-            email: 'abtahitajwar@gmail.com',
-            phone: '+88 01796 391053',
-            address: 'Jowar Sahara, Pragati Sharani',
-            website: 'https://abtahi-tajwar.github.io/abtahitajwar',
-            about: `I’m a master coach, best-selling author and a passionate speaker. I’m the founder of the first women-only hedge fund, special counsellor in many corporations across the globe. I’ve found balance between work and life, now I’m a totally happy person, loving mother, inspiring speaker and writer, and firm investor, but it didn’t come easily. I've gone though hundreds of failures and complicated situations. You can use my previous experience in order not to fall into the same trap. `,
-
-            linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/',
-            github: 'https://www.github.com/',
-            facebook: '',
-            instagram: '',
-            twitter: '',
-            pinterest: '',
-            skype: ''
-        },
-        skills: [
-            {
-                skill: "Problem Solving",
-                rating: 75
-            },
-            {
-                skill: "Web Design",
-                rating: 48
-            },
-            {
-                skill: "Programming",
-                rating: 94
-            }
-        ],
-        language: [
-            {
-                language: "English",
-                rating: 4
-            },
-            {
-                language: "Bangla",
-                rating: 1
-            }
-        ],
-        employment: [
-            {
-                title: "Content Marketing Lead",
-                subtitle: "Pipedrive, London",
-                date: "11 JAN - Present",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            },
-            {
-                title: "Web Developer",
-                subtitle: "Chittagong, Bangladesh",
-                date: "14 MAR - 13 DEC",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            },
-            {
-                title: "Junior Web Developer",
-                subtitle: "Pipedrive, London",
-                date: "1 FEB - 22 MAR",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            }
-        ],
-        education: [
-            {
-                title: "American International University",
-                subtitle: "B.Sc.",
-                date: "20 Mar - Present",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            }
-        ],
-        projects: [
-            {
-                title: "Online CV MAker",
-                subtitle: "https://github.com/abtahi-tajwar/ResumeBuilder",
-                date: "20 MAR - 29 MAR",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            }
-        ],
-        certificates: [
-            {
-                title: "Expert Reactjs Developer Full Course",
-                subtitle: "React js, Javascript",
-                date: "20 Mar - Present",
-                description: "Madison Blackstone is a director of brand marketing, with experience managing global teams and multi-million-dollar campaigns. Her background in brand strategy, visual design, and account management inform her mindful but competitive approach."
-            }
-        ],
-        references: [
-            {
-                name: "Mr. Michel Robinson",
-                subtitle: "Graphics Designer",
-                phone: "+880 1796-391053",
-                email: "michelrobinshon@gmail.com"
-            },
-            {
-                name: "Begum Rokeya",
-                subtitle: "Graphics Designer",
-                phone: "+880 1796-391053",
-                email: "begumrokeya@gmail.com"
-            }
-        ]
-    })
+    const cvInfo = useSelector(state => state.cvInfo)
     const handleAbout = () => {
-        setCvInfo({
-            ...cvInfo,
-            personalDetails: {
-                ...cvInfo.personalDetails,
-                about: editorRef.current.getContent()
-            }
-        })
+        dispatch(setSingleInfo({
+            groupName: 'personalDetails',
+            name: 'about',
+            value: editorRef.current.getContent()
+        }))
     }
     // Form Handling functions
     const handlePersonalDetails = (e) => {
-        setCvInfo({
-            ...cvInfo,
-            personalDetails: {
-                ...cvInfo.personalDetails,
-                [e.target.name]: e.target.value
-            }
-        })
+        dispatch(setSingleInfo({
+            groupName: 'personalDetails',
+            name: e.target.name,
+            value: e.target.value
+        }))
     }
-    const handleSkill = (index, obj, action) => {
-        if(action === 'add') {
-            setCvInfo({
-                ...cvInfo,
-                skills: [
-                    ...cvInfo.skills,
-                    obj
-                ]
-            })
-        } else if(action === 'delete') {
-            setCvInfo({
-                ...cvInfo,
-                skills: cvInfo.skills.filter((item, i) => i !== index )
-            })
-        } else if(action === 'edit') {
-            setCvInfo({
-                ...cvInfo,
-                skills: cvInfo.skills.map((item, i) => {
-                    if(i !== index) {
-                        return item
-                    }
-                    return obj
-                })
-            })
-        }
-    }
-    const handleLanguage = (index, obj, action) => {
-        if(action === 'add') {
-            setCvInfo({
-                ...cvInfo,
-                language: [
-                    ...cvInfo.language,
-                    obj
-                ]
-            })
-        } else if(action === 'delete') {
-            setCvInfo({
-                ...cvInfo,
-                language: cvInfo.language.filter((item, i) => i !== index )
-            })
-        } else if(action === 'edit') {
-            setCvInfo({
-                ...cvInfo,
-                language: cvInfo.language.map((item, i) => {
-                    if(i !== index) {
-                        return item
-                    }
-                    return obj
-                })
-            })
-        }
-    }
-    const handleGroupIncreasingInput = (index, obj, action, name) => {        
-        if(action === 'add') {
-            setCvInfo({
-                ...cvInfo,
-                [name]: [
-                    ...cvInfo[name],
-                    obj
-                ]
-            })
-        } else if(action === 'delete') {
-            setCvInfo({
-                ...cvInfo,
-                [name]: cvInfo[name].filter((item, i) => i !== index )
-            })
-        } else if(action === 'edit') {
-            console.log(index, obj, action)
-            setCvInfo({
-                ...cvInfo,
-                [name]: cvInfo[name].map((item, i) => {
-                    if(i !== index) {
-                        return item
-                    }
-                    return obj
-                })
-            })
-        }
+    const handleGroupIncreasingInput = (index, obj, type, name) => {        
+        dispatch(setGroupInfo({
+            groupName: name,
+            index, obj, type
+        }))
     }
     const handleAvatarUpload = (src) => {
-        setCvInfo({
-            ...cvInfo,
-            avatar: src
-        })
+        dispatch(setAvatar({
+            value: src
+        }))
     }
     return (
         <div className='flex'>
@@ -426,15 +244,15 @@ function Editor2() {
                     title="Skills & Language"
                 >
                     <MultipleIncreasingInput 
-                        name="Skills"
+                        name="skills"
                         values={cvInfo.skills}
-                        handleInput={handleSkill}
+                        handleInput={handleGroupIncreasingInput}
                         keys={["skill", "rating"]}
                     />
                     <MultipleIncreasingInput 
-                        name="Languages"
+                        name="language"
                         values={cvInfo.language}
-                        handleInput={handleLanguage}
+                        handleInput={handleGroupIncreasingInput}
                         keys={["language", "rating"]}
                     />
                 </Collapsible>
