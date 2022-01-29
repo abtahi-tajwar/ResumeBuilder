@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from './CVComponents/Style.style';
-
 export const DoubleColumn = styled.div`
     display: flex;
     height: 100%;
@@ -17,13 +16,30 @@ export const DoubleColumn = styled.div`
         flex: ${props => props.right ? props.right : 1 }
     }
 `
+export const Button = styled.div`
+    padding: 9px;
+    min-width: 50px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all .5s ease-out;
+    color: ${props => props.light ? 'black' : 'white' };
+    background-color: ${props => props.bgColor ? props.bgColor : 'black'};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        filter: brightness(0.75);
+    }
+`
 export const Flex = styled.div.attrs(props => ({
-        className:  props.className
+        className:  props.className,
+        style: props.style
     }))`
     display: flex;
     justify-content: ${props => props.justify ? props.justify : 'center'};
     align-items: ${props => props.align ? props.align : 'center'};
     ${props => props.gap && `gap: ${props.gap}`};
+    ${props => props.direction && `flex-direction: ${props.direction}`};
 `
 export const Grid = styled.div.attrs(props => ({
     className: props.className
@@ -47,7 +63,7 @@ export const SectionHeading = styled.h2`
     font-size: 1rem;
     width: 100%;
     padding-bottom: 5px;
-    border-bottom: 2px solid ${colors. accent};
+    border-bottom: 2px solid ${colors.accent};
     margin-bottom: 10px;
 `
 export const List = styled.ul`
@@ -58,7 +74,7 @@ export const List = styled.ul`
         align-items: center;
         gap: 5px;
         span {
-            color: ${colors. accent};
+            color: ${colors.accent};
             font-size: 1rem;
         }
     }

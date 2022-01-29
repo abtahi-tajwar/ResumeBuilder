@@ -30,21 +30,21 @@ function Serif({ cvInfo }) {
                     <SectionHeading>Contact Me</SectionHeading>
                     <BorderedList>
                         {cvInfo.personalDetails.phone !== '' && <li>
-                            <Icon icon="phone" size="24px"/>
+                            <Icon icon="phone" size={24} />
                             <div>
                                 <b>Contact</b>
                                 <p>{cvInfo.personalDetails.phone}</p>
                             </div>
                         </li>}
                         {cvInfo.personalDetails.email !== '' && <li>
-                            <Icon icon="email" size="24px"/>
+                            <Icon icon="email" size={24} />
                             <div>
                                 <b>Email</b>
                                 <p>{cvInfo.personalDetails.email}</p>
                             </div>
                         </li>}
                         {cvInfo.personalDetails.website !== '' && <li>
-                            <Icon icon="web" size="24px"/>
+                            <Icon icon="web" size={24} />
                             <div>
                                 <b>Web</b>
                                 <p>{cvInfo.personalDetails.website}</p>

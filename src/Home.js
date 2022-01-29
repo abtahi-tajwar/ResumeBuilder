@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SelectResume from './Components/pages/SelectResume';
 import About from './Components/pages/About';
 import Editor2 from './Components/Editor2';
+import Topnav from './Components/Home/Topnav';
+import Authentication from './Components/pages/Authentication';
 
 function Home() {
   return (
@@ -13,10 +15,14 @@ function Home() {
                 name="Resume Builder"
             />
             <Body>
-                <Routes>
-                   <Route path="/" element={<SelectResume />} /> 
-                   <Route path="/about" element={<About />} /> 
-                </Routes>
+                <Topnav />
+                <Content>
+                    <Routes>
+                        <Route path="/" element={<SelectResume />} /> 
+                        <Route path="/about" element={<About />} /> 
+                        <Route path="/authentication" element={<Authentication />} /> 
+                    </Routes>
+                </Content>
             </Body>
         </Wrapper>
   );
@@ -31,7 +37,10 @@ const Wrapper = styled.div`
 const Body = styled.div`
     flex: 4;
     background-color: white;
-    padding: 25px;
 `
-
+const Content = styled.div`
+    padding: 25px;
+    width: 100%;
+    box-sizing: border-box;
+`
 export default Home;
