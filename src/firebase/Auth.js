@@ -1,5 +1,5 @@
 import './init'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/auth/slice';
 import React from 'react';
@@ -26,28 +26,43 @@ export async function signIn(email, password) {
     let user = null
     try {
         user = await signInWithEmailAndPassword(auth, email, password)
+        return user
     } catch (error) {
         user = { 
             isError: true,
             errorCode: error.code,
             errorMessage: error.message
         }
+        return user
     }
 }
 export function getCurrentUser(dispatch) {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-        console.log('User', user)
         if(user) {   
             dispatch(setUser({
                 isLoggedIn: true,
                 user: user
             }))         
-            return user.id;
+            return user.uid;
         } else {
+            dispatch(setUser({
+                isLoggedIn: false,
+                user: null
+            }))
             return false
         }
     })
+}
+export async function signOutUser(dispatch) {
+    const auth = getAuth();
+    try {
+        const msg = await signOut(auth)
+        getCurrentUser(dispatch)
+        return msg
+    } catch( error ) {
+        return error;
+    }
 }
 function Auth() {
     const dispatch = useDispatch()

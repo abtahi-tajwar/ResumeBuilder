@@ -8,6 +8,7 @@ import Editor2 from './Components/Editor2';
 import Topnav from './Components/Home/Topnav';
 import Authentication from './Components/pages/Authentication';
 import { getCurrentUser } from './firebase/Auth';
+import SignOut from './Components/pages/SignOut';
 import Auth from './firebase/Auth'
 
 function Home() {
@@ -24,6 +25,7 @@ function Home() {
                         <Route path="/" element={<SelectResume />} /> 
                         <Route path="/about" element={<About />} /> 
                         <Route path="/authentication" element={<Authentication />} /> 
+                        <Route path="/logout" element={<SignOut />} /> 
                     </Routes>
                 </Content>
             </Body>

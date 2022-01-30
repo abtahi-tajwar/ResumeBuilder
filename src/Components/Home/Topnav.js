@@ -6,16 +6,19 @@ import { Button, Flex } from '../MainStyle.style';
 import { useSelector } from 'react-redux';
 
 function Topnav() {
-    const user = useSelector(state => state.userState.user)
+    
     const isLoggedIn = useSelector(state => state.userState.isLoggedIn)
-
+    const user = useSelector(state => state.userState.user)
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
     return <Wrapper bgColor={colors.gray}>
         {/* <p>Username</p>
         <Avatar src="empty.jpg" height="40px" width="40px"/> */}        
         <div>
-            {isLoggedIn ? <p>Username</p> : <p>Please Login to save your progress</p>}            
+            {isLoggedIn ? 
+                <p>{user.displayName !== null ? user.displayName : user.email }</p> : 
+                <p>Please Login to save your progress</p>
+            }            
         </div>
         {isLoggedIn ? 
             <Avatar src="empty.jpg" height="40px" width="40px"/> : 

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 function Sidenav({ name, logo }) {
     const userState = useSelector(state => state.userState)
+    const isLoggedIn = userState.isLoggedIn
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
   return <Wrapper color={colors.primary}>
@@ -16,7 +17,9 @@ function Sidenav({ name, logo }) {
           <Link to="/"><li><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</li></Link>
           <Link to="/about"><li><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</li></Link>
           <p>Account</p>
-          <Link to="/authentication"><li><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</li></Link>
+          {!isLoggedIn && <Link to="/authentication"><li><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</li></Link> }
+          {isLoggedIn && <Link to="/authentication"><li><i class="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </li></Link>}
+          {isLoggedIn && <Link to="/logout"><li><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </li></Link>}
       </Menu>
   </Wrapper>;
 }

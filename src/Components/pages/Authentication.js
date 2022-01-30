@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import LabeledInput from '../FormComponents/v2/LabeledInput';
 import { VariableContextValue } from '../VariableContext';
 import TabShifter from '../UIComponents/TabShifter';
-import { signUp } from '../../firebase/Auth';
+import { signIn, signUp } from '../../firebase/Auth';
 import Alert from '../UIComponents/Alert';
 import ClipLoader from "react-spinners/ClipLoader";
+import { Navigate } from 'react-router-dom';
 
 function Authentication() {
     const variables = useContext(VariableContextValue)
@@ -16,7 +17,7 @@ function Authentication() {
         password: "Hacked6251$",
         confirmPassword: "Hacked6251$"
     })
-    const [signUpState, setSignUpState] = useState({
+    const [actionState, setActionState] = useState({
         msg: '',
         isLoading: false,
         isSuccess: false
@@ -39,21 +40,21 @@ function Authentication() {
     ])
     useEffect(() => {
         setTimeout(() => {
-            setSignUpState({
+            setActionState({
                 msg: '',
                 isLoading: false,
                 isSuccess: false
             })
         },[6000])
-    }, [signUpState])
+    }, [actionState])
     const handleSignUp = async e => {
         e.preventDefault()
-        setSignUpState({
-            ...signUpState,
+        setActionState({
+            ...actionState,
             isLoading: true
         })
         if(input.password !== input.confirmPassword) {
-            setSignUpState({
+            setActionState({
                 isSuccess: false,
                 isLoading: false,
                 msg: 'Both password does not match'
@@ -61,16 +62,15 @@ function Authentication() {
             return
         }
         const user = await signUp(input.email, input.password)
-        console.log(user)
         if(user.isError) {
-            setSignUpState({
+            setActionState({
                 isSuccess: false,
                 isLoading: false,
                 msg: user.errorMessage
             })
             return
         }
-        setSignUpState({
+        setActionState({
             isSuccess: true,
             isLoading: false,
             msg: 'Signed Up successfully'
@@ -80,6 +80,23 @@ function Authentication() {
             password: "",
             confirmPassword: ""
         })
+    }
+    const handleSignIn = async e => {
+        e.preventDefault()
+        setActionState({
+            ...actionState,
+            isLoading: true
+        })
+        const user = await signIn(input.email, input.password)
+        if(user.isError) {
+            setActionState({
+                isSuccess: false,
+                isLoading: false,
+                msg: user.errorMessage
+            })
+            return
+        }
+        window.location.href = "/"
     }
     return (
         <Flex direction="column">
@@ -91,10 +108,9 @@ function Authentication() {
                 />
             </Tabs>
             <BoxContianer>
-                <form>
+                <form onSubmit={handleSignIn}>
                     {tabs[0].visible && <Flex direction="column" gap="10px" style={{ width: '100%' }}>
-                        <h2 style={{ marginBottom: '15px' }}>Login</h2>
-                        
+                        <h2 style={{ marginBottom: '15px' }}>Login</h2>                        
                             <LabeledInput
                                 value={input.email}
                                 name="email"
@@ -142,17 +158,17 @@ function Authentication() {
                             type="password"                        
                         />
                         <div style={{position: 'relative', width: '100%'}}>
-                            <ActionButton type="submit" bgColor={colors.accent} isLoading={signUpState.isLoading}>Sign Up</ActionButton>
+                            <ActionButton type="submit" bgColor={colors.accent} isLoading={actionState.isLoading}>Sign Up</ActionButton>
                             <div style={{
                                 position: 'absolute',
                                 left: '50%',
                                 top: '50%',
                                 transform: 'translate(-50%, -50%)'
-                            }}><ClipLoader color="gray" loading={signUpState.isLoading} size={40} /></div>
+                            }}><ClipLoader color="gray" loading={actionState.isLoading} size={40} /></div>
                         </div>
                     </Flex>}
                 </form>                
-                <Alert type={signUpState.isSuccess ? "success" : "error"} msg={signUpState.msg}/>
+                <Alert type={actionState.isSuccess ? "success" : "error"} msg={actionState.msg}/>
                 
             </BoxContianer>
         </Flex>
