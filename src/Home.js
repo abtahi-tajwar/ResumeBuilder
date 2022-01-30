@@ -7,8 +7,11 @@ import About from './Components/pages/About';
 import Editor2 from './Components/Editor2';
 import Topnav from './Components/Home/Topnav';
 import Authentication from './Components/pages/Authentication';
+import { getCurrentUser } from './firebase/Auth';
+import Auth from './firebase/Auth'
 
 function Home() {
+    Auth()
   return (
         <Wrapper>
             <Sidenav 

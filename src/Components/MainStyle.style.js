@@ -67,7 +67,7 @@ export const SectionHeading = styled.h2`
     margin-bottom: 10px;
 `
 export const List = styled.ul`
-    style-style-type: none;
+    list-style-type: none;
     li {
         margin-bottom: 10px;
         display: flex;

@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { VariableContextValue } from '../VariableContext';
+import { useSelector } from 'react-redux';
 
 
 function Sidenav({ name, logo }) {
+    const userState = useSelector(state => state.userState)
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
   return <Wrapper color={colors.primary}>

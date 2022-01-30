@@ -13,7 +13,6 @@ function LabeledInput({ label, name, value, handleInput, borderColor, type = "te
     const [inputTranslate,setInputTranslate] = useState('0px');
     useEffect(() => {
         if(value !== "") {
-            console.log(labelDom.current)
             setFSize('0.8rem')
             setLabelTop('5px')
             setInputTranslate('10px')
