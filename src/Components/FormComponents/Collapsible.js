@@ -41,7 +41,7 @@ function Collapsible({ title, selected, children}) {
     return (
         <div style={wrapper}>
             <div onClick={toggleCollapseState} style={collapseButton}>
-                <p><i class="fas fa-plus"></i> {title}</p>
+                <p><i className="fas fa-plus"></i> {title}</p>
             </div>
             {/* {isVisible && 
                 <Children >

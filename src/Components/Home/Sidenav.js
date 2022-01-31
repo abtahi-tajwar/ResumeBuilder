@@ -14,12 +14,12 @@ function Sidenav({ name, logo }) {
       {logo && <CompanyLogo src={logo} alt="Company Logo" />}
       <CompanyName>{name}</CompanyName>
       <Menu colors={colors}>
-          <Link to="/"><li><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</li></Link>
-          <Link to="/about"><li><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</li></Link>
+          <Link to="/"><MenuItem><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</MenuItem></Link>
+          <Link to="/about"><MenuItem><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</MenuItem></Link>
           <p>Account</p>
-          {!isLoggedIn && <Link to="/authentication"><li><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</li></Link> }
-          {isLoggedIn && <Link to="/authentication"><li><i class="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </li></Link>}
-          {isLoggedIn && <Link to="/logout"><li><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </li></Link>}
+          {!isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</MenuItem></Link> }
+          {isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </MenuItem></Link>}
+          {isLoggedIn && <Link to="/logout"><MenuItem><i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </MenuItem></Link>}
       </Menu>
   </Wrapper>;
 }
@@ -64,21 +64,29 @@ const Menu = styled.ul`
         }
     }
     li {
-        width: 100%;
-        padding: 15px;
-        padding-left: 50px;        
-        font-size: 1rem;
-        transition: background .3s ease-out;
-        cursor: pointer;        
-        color: white;   
-        box-sizing: border-box;
         i {
             color: ${props => props.colors.accent} !important;
-        }     
-        &:hover {
-            background-color: #171717;
-        }
+        } 
     }
+    
+`
+const MenuItem = styled.li`    
+    width: 100%;
+    padding: 15px;
+    padding-left: 50px;        
+    font-size: 1rem;
+    transition: background .3s ease-out;
+    cursor: pointer;        
+    color: white;   
+    box-sizing: border-box;        
+    &:hover {
+        background-color: #171717;
+    }
+    ${props => props.selected && `
+        pointer-events: none;
+        background-color: #171717;
+    `}
+    
 `
 
 export default Sidenav;

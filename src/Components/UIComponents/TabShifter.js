@@ -27,6 +27,7 @@ function TabShifter({ labels, tabs, setTabs, fontSize = "1.4rem", primaryColor =
     }
     return <Wrapper>
         {labels.map((item, index) => <Tab
+            key={index}
             selected={currentIndex === index && true}
             color={primaryColor}
             secondaryColor={secondaryColor}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Sidenav from './Components/Home/Sidenav';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,10 +9,9 @@ import Topnav from './Components/Home/Topnav';
 import Authentication from './Components/pages/Authentication';
 import { getCurrentUser } from './firebase/Auth';
 import SignOut from './Components/pages/SignOut';
-import Auth from './firebase/Auth'
+import { GetProjectData } from './firebase/Projects';
 
-function Home() {
-    Auth()
+function Home() {    
   return (
         <Wrapper>
             <Sidenav 

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 function Alert({ type, msg }) {
     if(msg !== "") {
         return <Wrapper type={type}>
-            {type==='success' && <i class="fas fa-check-circle"></i>}
-            {type==='error' && <i class="fas fa-times-circle"></i>}
-            {type==='alert' && <i class="fas fa-exclamation-triangle"></i>}{msg}
+            {type==='success' && <i className="fas fa-check-circle"></i>}
+            {type==='error' && <i className="fas fa-times-circle"></i>}
+            {type==='alert' && <i className="fas fa-exclamation-triangle"></i>}{msg}
         </Wrapper>;
     } else {
         return <div></div>

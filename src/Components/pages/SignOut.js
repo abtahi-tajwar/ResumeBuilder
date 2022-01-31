@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 function SignOut() {
     const dispatch = useDispatch()
-  signOutUser(dispatch);
+    signOutUser(dispatch);
     return (<Navigate to="/authentication" />)
 }
 

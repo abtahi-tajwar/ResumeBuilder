@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Section, GridGallery, Thumbnail } from './PageStyle.style';
 import { Link } from 'react-router-dom';
+import { GetProjectData } from '../../firebase/Projects';
 
 function SelectResume() {
+    
+    const [projectData, setProjectData] = useState()
+    GetProjectData(setProjectData)
+    useEffect(() => {
+        console.log(projectData)
+    },[projectData])
   return <div>
     <h1>Select A Resume template to start</h1>
     <Section>

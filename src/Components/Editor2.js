@@ -42,7 +42,7 @@ function Editor2() {
         pdfDom.style.transform = `scale(${scaleFactor})`
         document.querySelectorAll("i").forEach(item => {
             item.style.display = 'none'
-            item.insertAdjacentHTML('afterend', '<span class="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
+            item.insertAdjacentHTML('afterend', '<span className="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
         })
         doc.html(pdfDom, {
             callback: () => {

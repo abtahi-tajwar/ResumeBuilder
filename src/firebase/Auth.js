@@ -1,8 +1,7 @@
-import './init'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/auth/slice';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export async function signUp(email, password) {
     const auth = getAuth()
@@ -42,9 +41,16 @@ export function getCurrentUser(dispatch) {
         if(user) {   
             dispatch(setUser({
                 isLoggedIn: true,
-                user: user
+                user: {
+                    accessToken: user.accessToken,
+                    uid: user.uid,
+                    email: user.email,
+                    emailVerified: user.emailVerified,
+                    isAnonymous: user.isAnonymous,
+                    displayName: user.displayName
+                }
             }))         
-            return user.uid;
+            return user
         } else {
             dispatch(setUser({
                 isLoggedIn: false,
@@ -66,7 +72,7 @@ export async function signOutUser(dispatch) {
 }
 function Auth() {
     const dispatch = useDispatch()
-    getCurrentUser(dispatch)
+    getCurrentUser(dispatch)    
 }
 
 export default Auth;
