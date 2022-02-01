@@ -42,5 +42,8 @@ export const cvInfoReducer = {
     setAvatar: (state, action) => ({
         ...state,
         avatar: action.payload.value
+    }),
+    setCVInfo: (state, action) => ({
+        ...action.payload
     })
 }

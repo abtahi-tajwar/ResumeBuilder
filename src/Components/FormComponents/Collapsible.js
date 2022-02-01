@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { colors } from '../CVComponents/Style.style';
-function Collapsible({ title, selected, children}) {
+function Collapsible({ title, selected = false, children}) {
 
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(selected)
     const collapsibleDiv = useRef()
     const isV = useRef(false)
     const wrapper = {

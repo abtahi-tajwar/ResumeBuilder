@@ -41,6 +41,7 @@ const Wrapper = styled.div`
 const Body = styled.div`
     flex: 4;
     background-color: white;
+    overflow-y: scroll;
 `
 const Content = styled.div`
     padding: 25px;

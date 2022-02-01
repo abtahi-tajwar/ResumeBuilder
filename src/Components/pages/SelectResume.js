@@ -1,18 +1,43 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Section, GridGallery, Thumbnail } from './PageStyle.style';
 import { Link } from 'react-router-dom';
-import { GetProjectData } from '../../firebase/Projects';
+import { TestProjectData, GetAllProjects } from '../../firebase/Projects';
+import { useSelector } from 'react-redux';
+import CVPage from '../Templates/CVPage';
+import styled from 'styled-components';
 
 function SelectResume() {
-    
-    const [projectData, setProjectData] = useState()
-    GetProjectData(setProjectData)
+    const user = useSelector(state => state.userState.user)
+    const [projects, setProjects] = useState()
     useEffect(() => {
-        console.log(projectData)
-    },[projectData])
+        GetAllProjects(user, projects=> {
+            setProjects(projects)
+        })
+    }, [user])
   return <div>
+      {projects && <Section style={{ marginBottom: '50px'}}>
+          <h1 style={{marginBottom: '20px'}}>Saved CV Projects</h1>
+        <GridGallery width="300px">
+            {projects.map(item => (
+                <Link to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>
+                    <SavedProjectWrapper>                        
+                        <CVPage 
+                            page="letter"
+                            cvInfo={JSON.parse(item.cvInfo)}
+                            theme={item.theme}
+                            thumbnail={true}
+                        />                        
+                        <div className="info">
+                            <p>{JSON.parse(item.cvInfo).personalDetails.name}</p>
+                            <p className='subtitle'>{JSON.parse(item.cvInfo).personalDetails.subtitle}</p>
+                        </div>
+                    </SavedProjectWrapper>
+                </Link>
+            ))}                
+        </GridGallery>
+      </Section>}
     <h1>Select A Resume template to start</h1>
-    <Section>
+    <Section>        
         <GridGallery width="300px">
             <Link to="/editor/compact">
                 <Thumbnail name="Compact" >
@@ -33,5 +58,27 @@ function SelectResume() {
     </Section>
   </div>;
 }
+
+const SavedProjectWrapper = styled.div`
+    width: 100%;
+    box-shadow: 7px 2px 11px 0px rgba(0,0,0,0.13);
+    box-sizing: border-box;
+    transition: box-shadow .3s ease-out;
+    color: black;
+    &:hover {
+        box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.13);
+    }
+    & > .info {
+        font-size: 1.3rem;
+        font-weight: 300;
+        background-color: #f2f2f2;
+        padding: 15px;
+        .subtitle {
+            font-size: 0.9rem;
+            font-weight: bold;
+            
+        }
+    }
+`
 
 export default SelectResume;

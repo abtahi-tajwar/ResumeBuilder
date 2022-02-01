@@ -8,5 +8,5 @@ export const cvInfoSlice = createSlice({
     reducers: cvInfoReducer
 })
 
-export const { setSingleInfo, setGroupInfo, setAvatar } = cvInfoSlice.actions
+export const { setSingleInfo, setGroupInfo, setAvatar, setCVInfo } = cvInfoSlice.actions
 export default cvInfoSlice.reducer

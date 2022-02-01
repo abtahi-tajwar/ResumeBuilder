@@ -24,6 +24,10 @@ export const Button = styled.div`
     transition: all .5s ease-out;
     color: ${props => props.light ? 'black' : 'white' };
     background-color: ${props => props.bgColor ? props.bgColor : 'black'};
+    ${props => props.disabled && 
+        `pointer-events : none;
+        opacity: 0.75`
+    };
     display: flex;
     justify-content: center;
     align-items: center;

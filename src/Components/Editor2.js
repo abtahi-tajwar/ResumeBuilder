@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CVPage from './Templates/CVPage';
 import { useReactToPrint } from 'react-to-print';
 import { template1 } from './Templates';
 import jsPDF from 'jspdf';
 import { Divider } from './CVComponents/Style.style';
 import Collapsible from './FormComponents/Collapsible';
-import { Grid } from './MainStyle.style';
+import { Button, Flex, Grid } from './MainStyle.style';
 import TextInput from './FormComponents/TextInput';
 import MultipleIncreasingInput from './FormComponents/v2/MultipleIncreasingInput';
 import IncreasingGroupInput from './FormComponents/v2/IncreasingGroupInput';
@@ -14,7 +14,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import ReferencesgroupInput from './FormComponents/v2/ReferencesgroupInput';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSingleInfo, setGroupInfo, setAvatar } from '../redux/cvInfo.js/slice';
+import ClipLoader from "react-spinners/ClipLoader";
+import { setSingleInfo, setGroupInfo, setAvatar, setCVInfo } from '../redux/cvInfo.js/slice';
+import { SetProjectData, GetProjectData } from '../firebase/Projects';
 
 
 function Editor2() {
@@ -22,7 +24,9 @@ function Editor2() {
     /* Functions for handle pdf print and download */
     const componentRef  = useRef()
     const editorRef = useRef(null);
-    const { theme } = useParams()
+    const { theme, id } = useParams()
+    const [saveMsg, setSaveMsg] = useState()
+    const [saveLoading, setSaveLoading] = useState(false)
     const dispatch = useDispatch()
 
     const handlePrint = useReactToPrint({
@@ -62,7 +66,9 @@ function Editor2() {
 
     // Template for dynamic building, currenlty is not in use
     const template = template1
-    const cvInfo = useSelector(state => state.cvInfo)
+    const states = useSelector(state => state)
+    let cvInfo = states.cvInfo
+    const userInfo = states.userState.user
     const handleAbout = () => {
         dispatch(setSingleInfo({
             groupName: 'personalDetails',
@@ -70,6 +76,12 @@ function Editor2() {
             value: editorRef.current.getContent()
         }))
     }
+    useEffect(() => {
+        GetProjectData(userInfo, id, data => {
+            const obj = JSON.parse(data.cvInfo)
+            dispatch(setCVInfo(obj))
+        })
+    }, [])
     // Form Handling functions
     const handlePersonalDetails = (e) => {
         dispatch(setSingleInfo({
@@ -89,12 +101,32 @@ function Editor2() {
             value: src
         }))
     }
+    const saveCurrentData = () => {
+        setSaveLoading(true)
+        setSaveMsg(<div><ClipLoader color="gray" loading={true} size={10} /> Saving </div>)
+        SetProjectData(userInfo, theme, cvInfo, id, (docRef) => {
+            setSaveLoading(false)
+            setSaveMsg(<div><p style={{color: 'green'}}><i className="fas fa-check"> Saved</i></p></div>)
+            setTimeout(() => {
+                setSaveMsg("")
+            }, 5000)
+        })
+    }
     return (
         <div className='flex'>
             <div className='container flex-1 scroll-window full-height'>
-                <h2 className="light-text">Live CV Editor</h2>
-                <button onClick={handlePrint} className="btn m-1">Print</button>
-                <button onClick={pdfDownload} className="btn m-1">Download</button>
+            <h2 className="light-text">Live CV Editor</h2>
+                <Flex justify="space-between">                   
+                    <div>                        
+                        <button onClick={handlePrint} className="btn m-1"><i className="fas fa-print"></i> Print</button>
+                        <button onClick={pdfDownload} className="btn m-1"><i className="fas fa-download"></i> Download</button>
+                    </div>
+                    <Flex gap="10px">
+                        {saveMsg}
+                        <Button onClick={saveCurrentData} disabled={saveLoading}><i className="fas fa-save"></i>&nbsp;&nbsp; Save Your Progress</Button>
+                        {/* <button onClick={saveCurrentData} className="btn btn-accent mt-1"><i className="fas fa-save"></i> Save Your Progress </button> */}
+                    </Flex>
+                </Flex>
                 <Divider />
                 {/* Avatar Image Upload */}
                 <div className="mt-2">
@@ -109,6 +141,7 @@ function Editor2() {
                 {/* Personal Information */}
                 <Collapsible 
                     title="Personal Details"
+                    selected
                 >
                     <Grid
                         cols="repeat(auto-fit, minmax(250px, 1fr))"

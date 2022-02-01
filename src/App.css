@@ -35,6 +35,20 @@ button {
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
+    transition: background .5s ease-out;
+}
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #14558d !important;
+}
+.btn-accent {
+    background-color: #fbb13c;
+}
+.btn-accent:hover {
+    background-color: #fda81f !important;
 }
 .btn:hover {
     background-color: var(--light-gray);
