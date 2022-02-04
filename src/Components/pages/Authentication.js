@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import LabeledInput from '../FormComponents/v2/LabeledInput';
 import { VariableContextValue } from '../VariableContext';
 import TabShifter from '../UIComponents/TabShifter';
-import { signIn, signUp } from '../../firebase/Auth';
+import { signIn, signInWithGoogle, signUp } from '../../firebase/Auth';
 import Alert from '../UIComponents/Alert';
 import ClipLoader from "react-spinners/ClipLoader";
 import { Navigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
 function Authentication() {
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
+    const [googleLoginLoading, setGoogleLoginLoading] = useState(false)
     const [input, setInput] = useState({
         email: "abtahitajwar@gmail.com",
         password: "Hacked6251$",
@@ -98,6 +99,13 @@ function Authentication() {
         }
         window.location.href = "/"
     }
+    const handleGoogleSignIn = () => {
+        setGoogleLoginLoading(true)
+        signInWithGoogle().then(result => {
+            console.log(result)
+            setGoogleLoginLoading(false)
+        })
+    }
     return (
         <Flex direction="column">
             <Tabs>
@@ -109,7 +117,7 @@ function Authentication() {
             </Tabs>
             <BoxContianer>
                 <form onSubmit={handleSignIn}>
-                    {tabs[0].visible && <Flex direction="column" gap="10px" style={{ width: '100%' }}>
+                    {tabs[0].visible && <React.Fragment><Flex direction="column" gap="10px" style={{ width: '100%' }}>
                         <h2 style={{ marginBottom: '15px' }}>Login</h2>                        
                             <LabeledInput
                                 value={input.email}
@@ -127,13 +135,24 @@ function Authentication() {
                                 borderColor={colors.primary}
                                 type="password"
                             />
-                            <ActionButton type="submit" bgColor={colors.accent}>Sign Up</ActionButton>
+                            <ActionButton type="submit" bgColor={colors.accent}>Login</ActionButton>
                                 
-                    </Flex>}
+                        </Flex>
+                        <Flex gap="10px" style={{ marginTop: '30px' }}>
+                            <ActionButton 
+                                isLoading={googleLoginLoading} 
+                                bgColor="#EA4335" 
+                                fontSize="0.9rem"
+                                onClick={handleGoogleSignIn}
+                            ><i className="fab fa-google"></i> Login With Google </ActionButton>
+                            <ActionButton bgColor="#4267B2" fontSize="0.9rem"><i className="fab fa-facebook-f"></i> Login With Facebook </ActionButton>
+                        </Flex>  
+                    </React.Fragment>                  
+                    }
                 </form>
 
                 <form onSubmit={handleSignUp}>
-                    {tabs[1].visible && <Flex direction="column" gap="10px" style={{ width: '100%' }}>
+                    {tabs[1].visible && <React.Fragment><Flex direction="column" gap="10px" style={{ width: '100%' }}>
                         <h2 style={{ marginBottom: '15px' }}>Sign Up</h2>
                         <LabeledInput
                             value={input.email}
@@ -166,7 +185,17 @@ function Authentication() {
                                 transform: 'translate(-50%, -50%)'
                             }}><ClipLoader color="gray" loading={actionState.isLoading} size={40} /></div>
                         </div>
-                    </Flex>}
+                    </Flex>
+                    <Flex gap="10px" style={{ marginTop: '30px' }}>
+                        <ActionButton 
+                            isLoading={googleLoginLoading} 
+                            bgColor="#EA4335" 
+                            fontSize="0.9rem"
+                        ><i className="fab fa-google"></i> Login With Google </ActionButton>
+                        <ActionButton bgColor="#4267B2" fontSize="0.9rem"><i className="fab fa-facebook-f"></i> Login With Facebook </ActionButton>
+                    </Flex> 
+                    </React.Fragment>
+                    }
                 </form>                
                 <Alert type={actionState.isSuccess ? "success" : "error"} msg={actionState.msg}/>
                 
@@ -188,7 +217,7 @@ const ActionButton = styled.button`
     background-color: ${props => props.bgColor ? props.bgColor : 'black'};
     border-radius: 9px;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: ${props => props.fontSize ? props.fontSize : '1.4rem'};
     outline: none;
     border: none;
     transition: all .3s ease-out;

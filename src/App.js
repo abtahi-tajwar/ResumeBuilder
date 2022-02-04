@@ -5,6 +5,7 @@ import Home from './Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import VariableContext from './Components/VariableContext';
 import Auth from './firebase/Auth';
+import Verification from './Components/pages/Verification';
 
 function App() {
   Auth()

@@ -77,10 +77,12 @@ function Editor2() {
         }))
     }
     useEffect(() => {
-        GetProjectData(userInfo, id, data => {
-            const obj = JSON.parse(data.cvInfo)
-            dispatch(setCVInfo(obj))
-        })
+        if(id) {
+            GetProjectData(userInfo, id, data => {
+                const obj = JSON.parse(data.cvInfo)
+                dispatch(setCVInfo(obj))
+            })
+        }
     }, [])
     // Form Handling functions
     const handlePersonalDetails = (e) => {

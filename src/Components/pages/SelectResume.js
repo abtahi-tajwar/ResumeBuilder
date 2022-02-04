@@ -7,12 +7,16 @@ import CVPage from '../Templates/CVPage';
 import styled from 'styled-components';
 
 function SelectResume() {
-    const user = useSelector(state => state.userState.user)
+    const userState = useSelector(state => state.userState)
+    const user = userState.user
+    const loginStatus = userState.loginStatus
     const [projects, setProjects] = useState()
     useEffect(() => {
-        GetAllProjects(user, projects=> {
-            setProjects(projects)
-        })
+        if(loginStatus === 1) {
+            GetAllProjects(user, projects => {
+                setProjects(projects)
+            })
+        } 
     }, [user])
   return <div>
       {projects && <Section style={{ marginBottom: '50px'}}>

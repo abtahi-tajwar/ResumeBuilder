@@ -7,21 +7,46 @@ import { useSelector } from 'react-redux';
 
 function Sidenav({ name, logo }) {
     const userState = useSelector(state => state.userState)
+    const loginState = userState.loginStatus
     const isLoggedIn = userState.isLoggedIn
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
-  return <Wrapper color={colors.primary}>
-      {logo && <CompanyLogo src={logo} alt="Company Logo" />}
-      <CompanyName>{name}</CompanyName>
-      <Menu colors={colors}>
-          <Link to="/"><MenuItem><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</MenuItem></Link>
-          <Link to="/about"><MenuItem><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</MenuItem></Link>
-          <p>Account</p>
-          {!isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</MenuItem></Link> }
-          {isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </MenuItem></Link>}
-          {isLoggedIn && <Link to="/logout"><MenuItem><i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </MenuItem></Link>}
-      </Menu>
-  </Wrapper>;
+
+    console.log(userState)
+    return <Wrapper color={colors.primary}>
+        {logo && <CompanyLogo src={logo} alt="Company Logo" />}
+        <CompanyName>{name}</CompanyName>
+        <Menu colors={colors}>
+            {/* If not logged in */}
+            {loginState === -1 && <React.Fragment>
+                <Link to="/"><MenuItem><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</MenuItem></Link>
+                <Link to="/about"><MenuItem><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</MenuItem></Link>
+                <p>Account</p>
+                <Link to="/authentication"><MenuItem><i className="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</MenuItem></Link>
+            </React.Fragment>}
+            {/* If logged in but not verified */}
+            {loginState === 0 && <React.Fragment>
+                <Link to="/"><MenuItem><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</MenuItem></Link>
+                <Link to="/about"><MenuItem><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</MenuItem></Link>
+                <p>Account</p>
+                <Link to="/logout"><MenuItem><i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </MenuItem></Link>
+            </React.Fragment>}
+
+            {loginState === 1 && <React.Fragment>
+                <Link to="/"><MenuItem><i className="fas fa-border-all"></i>&nbsp;&nbsp; Build Resume</MenuItem></Link>
+                <Link to="/about"><MenuItem><i className="fas fa-info-circle"></i>&nbsp;&nbsp; About</MenuItem></Link>
+                <p>Account</p>
+                <Link to="/authentication"><MenuItem><i className="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </MenuItem></Link>
+                <Link to="/logout"><MenuItem><i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </MenuItem></Link>
+            </React.Fragment>}
+            {/* <p>Account</p>
+
+
+            {!isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Login/Sign Up</MenuItem></Link>}
+            {isLoggedIn && <Link to="/authentication"><MenuItem><i className="fas fa-user-alt"></i>&nbsp;&nbsp; Profile </MenuItem></Link>}
+            {isLoggedIn && <Link to="/logout"><MenuItem><i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Logout </MenuItem></Link>} */}
+        </Menu>
+    </Wrapper>;
 }
 
 const Wrapper = styled.div`

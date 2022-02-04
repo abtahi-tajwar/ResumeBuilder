@@ -67,7 +67,9 @@ function Icon({ icon = "email", size=16, light=false, color=false }) {
       }
 
       ctx.putImageData(imgData, 0, 0)
-      imgTag.current.src = canvasRef.current.toDataURL()
+      if(canvasRef.current !== null) {
+        imgTag.current.src = canvasRef.current.toDataURL()
+      }
     }
   }, [icons])
   return (
