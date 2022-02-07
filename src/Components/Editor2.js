@@ -22,6 +22,11 @@ import NavigationTray from './Home/NavigationTray';
 import styled from 'styled-components';
 import { Preview } from 'react-html2pdf';
 import { Link } from 'react-router-dom';
+// Native 
+// import 'jspdf-autotable';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file';
+import { isPlatform } from "@ionic/react";
 
 
 function Editor2() {
@@ -49,22 +54,66 @@ function Editor2() {
         console.log(doc.internal.pageSize.width);
         let scaleFactor = 0.565;
         const pdfDom = document.querySelector(".pdfDownload")
-        pdfDom.style.transformOrigin = `top left`
-        pdfDom.style.transform = `scale(${scaleFactor})`
-
+        // pdfDom.style.transformOrigin = `top left`
+        // pdfDom.style.transform = `scale(${scaleFactor})`
         doc.html(pdfDom, {
             callback: () => {
-                doc.save('resume.pdf');
-                pdfDom.style.transform = `scale(1)`
-                // const docOutput = doc.output("blob");
-                // var csvURL = window.URL.createObjectURL(docOutput);
-                // var tempLink = document.createElement('a');
-                // tempLink.href = csvURL;
-                // tempLink.setAttribute('download', 'resume.pdf');
-                // tempLink.click();
-                
+                // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+                // {
+                //     var blob = doc.output("blob");
+                //     window.open(URL.createObjectURL(blob));
+                // }
+                // else
+                // {
+                //     doc.save('resume.pdf');
+                // }
+                let pdfOutput = doc.output();
+                if (isPlatform("android")) {
+                    // for Android device
+                    const directory = File.externalRootDirectory + 'Download/';
+                    const fileName = `invoice-${new Date().getTime()}.pdf`
+                    File.writeFile(directory, fileName, pdfOutput, true).then(succ => {
+                        FileOpener.showOpenWithDialog(directory + fileName, 'application/pdf')
+                        .then(() => console.log('File opened'))
+                        .catch(error => console.log('Error opening file', error));
+                    },
+                    err => {
+                        console.log(" writing File error : ", err)
+                    })
+                } else if (isPlatform("ios")) {
+                // for iOS device
+                    console.log('ios device')
+                    const directory = File.tempDirectory;
+                    const fileName = `invoice-${new Date().getTime()}.pdf`
+                    File.writeFile(directory, fileName, pdfOutput, true).then(success => {
+                        FileOpener.showOpenWithDialog(directory + fileName, 'application/pdf')
+                        .then(() => console.log('File opened'))
+                        .catch(e => console.log('Error opening file', e));
+                    },
+                    err => {
+                    console.log(" writing File error : ", err)
+                    })
+                } else {
+                // for desktop
+                    doc.save('resume.pdf')
+                }
             }
-        });
+        })
+
+
+        // doc.html(pdfDom, {
+        //     callback: () => {
+        //         doc.save('resume.pdf');
+        //         pdfDom.style.transform = `scale(1)`
+        //         // const docOutput = doc.output("blob");
+        //         // var csvURL = window.URL.createObjectURL(docOutput);
+        //         // var tempLink = document.createElement('a');
+        //         // tempLink.href = csvURL;
+        //         // tempLink.setAttribute('download', 'resume.pdf');
+        //         // tempLink.click();
+                
+        //     }
+        // });
     }
     /* Functions for handle pdf print and download */
 
