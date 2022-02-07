@@ -1,0 +1,3 @@
+-> Subtitle, github fields needs to be added
+-> Layout breaks if address field is too long 
+-> Always logs in with same google account

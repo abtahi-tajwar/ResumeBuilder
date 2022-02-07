@@ -14,9 +14,9 @@ function Authentication() {
     const colors = variables.colors
     const [googleLoginLoading, setGoogleLoginLoading] = useState(false)
     const [input, setInput] = useState({
-        email: "abtahitajwar@gmail.com",
-        password: "Hacked6251$",
-        confirmPassword: "Hacked6251$"
+        email: "",
+        password: "",
+        confirmPassword: ""
     })
     const [actionState, setActionState] = useState({
         msg: '',
@@ -135,10 +135,9 @@ function Authentication() {
                                 borderColor={colors.primary}
                                 type="password"
                             />
-                            <ActionButton type="submit" bgColor={colors.accent}>Login</ActionButton>
-                                
+                            <ActionButton type="submit" bgColor={colors.accent}>Login</ActionButton>                                
                         </Flex>
-                        <Flex gap="10px" style={{ marginTop: '30px' }}>
+                        {/* <Flex gap="10px" style={{ marginTop: '30px' }}>
                             <ActionButton 
                                 isLoading={googleLoginLoading} 
                                 bgColor="#EA4335" 
@@ -146,7 +145,7 @@ function Authentication() {
                                 onClick={handleGoogleSignIn}
                             ><i className="fab fa-google"></i> Login With Google </ActionButton>
                             <ActionButton bgColor="#4267B2" fontSize="0.9rem"><i className="fab fa-facebook-f"></i> Login With Facebook </ActionButton>
-                        </Flex>  
+                        </Flex>   */}
                     </React.Fragment>                  
                     }
                 </form>
@@ -186,14 +185,14 @@ function Authentication() {
                             }}><ClipLoader color="gray" loading={actionState.isLoading} size={40} /></div>
                         </div>
                     </Flex>
-                    <Flex gap="10px" style={{ marginTop: '30px' }}>
+                    {/* <Flex gap="10px" style={{ marginTop: '30px' }}>
                         <ActionButton 
                             isLoading={googleLoginLoading} 
                             bgColor="#EA4335" 
                             fontSize="0.9rem"
                         ><i className="fab fa-google"></i> Login With Google </ActionButton>
                         <ActionButton bgColor="#4267B2" fontSize="0.9rem"><i className="fab fa-facebook-f"></i> Login With Facebook </ActionButton>
-                    </Flex> 
+                    </Flex>  */}
                     </React.Fragment>
                     }
                 </form>                

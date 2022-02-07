@@ -30,13 +30,13 @@ function Compact({ cvInfo }) {
                         <Section>
                             <SectionHeading>Skills</SectionHeading>
                             <DottedList>
-                                {cvInfo.skills.map(item => <li>{item.skill}</li>)}
+                                {cvInfo.skills.map((item, index) => <li key={index}>{item.skill}</li>)}
                             </DottedList>
                         </Section>
                         <Section>
                             <SectionHeading>Language</SectionHeading>
                             <List>
-                                {cvInfo.language.map(item => <SkillRating name={item.language} rating={item.rating} total={5} color={colors.accent} />)}
+                                {cvInfo.language.map((item, index) => <SkillRating key={index} name={item.language} rating={item.rating} total={5} color={colors.accent} />)}
                                 {/* <SkillRating name="English" rating={4} total={5} color={colors.accent} />
                                 <SkillRating name="Bangla" rating={1} total={5} color={colors.accent} /> */}
                             </List>
@@ -48,7 +48,7 @@ function Compact({ cvInfo }) {
                     <Section>
                         <Heading>
                             <h1>{cvInfo.personalDetails.name}</h1>
-                            <p>Fullstack Web Developer</p>
+                            <p>{cvInfo.personalDetails.subtitle}</p>
                         </Heading>
                     </Section>
                     <Section>
@@ -60,7 +60,7 @@ function Compact({ cvInfo }) {
                     <Section>
                         <SectionHeading>Employment</SectionHeading>
                         <List>
-                            {cvInfo.employment.map(item => <li><Listing 
+                            {cvInfo.employment.map((item, index) => <li key={index}><Listing                                
                                 title={item.title}
                                 subtitle = {item.subtitle}
                                 date = {item.date}
@@ -73,7 +73,7 @@ function Compact({ cvInfo }) {
                     <Section>
                         <SectionHeading>Education</SectionHeading>
                         <List>
-                            {cvInfo.education.map(item => <li><Listing 
+                            {cvInfo.education.map((item, index) => <li key={index}><Listing                                
                                 title={item.title}
                                 subtitle = {item.subtitle}
                                 date = {item.date}
@@ -85,7 +85,7 @@ function Compact({ cvInfo }) {
                     <Section>
                         <SectionHeading>Projects</SectionHeading>
                         <List>
-                            {cvInfo.projects.map(item => <li><Listing 
+                            {cvInfo.projects.map((item, index) => <li key={index}><Listing 
                                 title={item.title}
                                 subtitle = {item.subtitle}
                                 date = {item.date}
@@ -97,7 +97,7 @@ function Compact({ cvInfo }) {
                     <Section>
                         <SectionHeading>Certificates</SectionHeading>
                         <List>
-                            {cvInfo.certificates.map(item => <li><Listing 
+                            {cvInfo.certificates.map((item, index) => <li key={index}><Listing 
                                 title={item.title}
                                 subtitle = {item.subtitle}
                                 date = {item.date}

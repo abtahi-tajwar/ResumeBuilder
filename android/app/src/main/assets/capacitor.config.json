@@ -1,0 +1,8 @@
+{
+	"appId": "io.ionic.nameofyourapp",
+	"appName": "ST Resume Builder",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "build",
+	"cordova": {}
+}

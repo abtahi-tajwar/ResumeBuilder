@@ -6,7 +6,11 @@ export const spacing = {
 
 export const GridGallery = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
+    ${props => props.autoFit ? 
+        `grid-template-columns: repeat(auto-fill, minmax(${props.width}, 1fr));` :
+        `grid-template-columns: repeat(auto-fill, ${props.width});`
+    }
+    
     grid-template-rows: auto;
     grid-gap: 30px;
     & > div {
@@ -24,8 +28,8 @@ export const Section = styled.div`
 `
 
 export const Thumbnail = styled.div`
-    height: ${props => props.height ? props.height : '390px' };
-    width: ${props => props.width ? props.width : '300px' };
+    height: ${props => props.height ? props.height : '100%' };
+    width: ${props => props.width ? props.width : '100%' };
     box-shadow: 7px 2px 11px 0px rgba(0,0,0,0.13);
     transition: all .3s ease-out;
     position: relative;

@@ -33,20 +33,20 @@ function Elfin({ cvInfo }) {
             { cvInfo.skills.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>Skills</SectionHeading>
                 <DottedList color="white">
-                    {cvInfo.skills.map(item => <li>{item.skill}</li>)}
+                    {cvInfo.skills.map((item, index) => <li key={index}>{item.skill}</li>)}
                 </DottedList>
             </SectionHr> }
             { cvInfo.language.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>Languages</SectionHeading>
                 <List>
-                {cvInfo.language.map(item => <SkillRating name={item.language} rating={item.rating} total={5} color="white" />)}
+                {cvInfo.language.map((item, index) => <SkillRating key={index} name={item.language} rating={item.rating} total={5} color="white" />)}
                 </List>
             </SectionHr> }
             {cvInfo.references.length > 0 && <SectionHr theme="dark">
                 <SectionHeading>References</SectionHeading>
                 {cvInfo.references.length > 0 && 
                 <List>
-                    {cvInfo.references.map(item => <li><References 
+                    {cvInfo.references.map((item, index) => <li key={index}><References 
                         name={item.name}
                         subtitle={item.subtitle}
                         contact={item.phone}
@@ -64,7 +64,7 @@ function Elfin({ cvInfo }) {
                             <Name>{cvInfo.personalDetails.name}</Name>
                             <p>{cvInfo.personalDetails.subtitle}</p>
                         </div>
-                        <div>
+                        <div style={{ maxWidth: "200px"}}>
                             <List>
                             <li><Icon icon="email" /> { cvInfo.personalDetails.email }</li>
                             <li><Icon icon="phone" /> { cvInfo.personalDetails.phone }</li>
@@ -77,8 +77,9 @@ function Elfin({ cvInfo }) {
                 cvInfo.employment.length > 0 &&               
                 <SectionHr>
                     <SectionHeading>Work Experience</SectionHeading>
-                    {cvInfo.employment.map(item => 
+                    {cvInfo.employment.map((item, index) => 
                         <Listing 
+                            key={index}
                             title={item.title}
                             subtitle={item.subtitle}
                             date={item.date}
@@ -91,8 +92,9 @@ function Elfin({ cvInfo }) {
                   cvInfo.projects.length > 0 &&
                     <SectionHr>
                         <SectionHeading>Projects</SectionHeading>
-                        {cvInfo.projects.map(item => 
+                        {cvInfo.projects.map((item, index) => 
                             <Listing 
+                                key={index}
                                 title={item.title}
                                 subtitle={item.subtitle}
                                 date={item.date}
@@ -104,8 +106,9 @@ function Elfin({ cvInfo }) {
               {cvInfo.education.length > 0 &&
                 <SectionHr>
                     <SectionHeading>Education</SectionHeading>
-                    {cvInfo.education.map(item => 
+                    {cvInfo.education.map((item, index) => 
                         <Listing 
+                            key={index}
                             title={item.title}
                             subtitle={item.subtitle}
                             date={item.date}
@@ -117,8 +120,9 @@ function Elfin({ cvInfo }) {
             {cvInfo.certificates.length > 0 && 
               <SectionHr>
                   <SectionHeading>Certificates</SectionHeading>
-                  {cvInfo.certificates.map(item => 
-                    <Listing 
+                  {cvInfo.certificates.map((item, index) => 
+                    <Listing
+                        key={index} 
                         title={item.title}
                         subtitle={item.subtitle}
                         date={item.date}

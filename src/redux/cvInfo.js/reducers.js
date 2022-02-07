@@ -3,7 +3,7 @@ export const cvInfoReducer = {
         ...state,
         [action.payload.groupName]: {
             ...state[action.payload.groupName],
-            [action.payload.name]: [action.payload.value]
+            [action.payload.name]: action.payload.value
         }
     }),
     setGroupInfo: (state, action) => {

@@ -22,6 +22,7 @@ export const Button = styled.div`
     border-radius: 9px;
     cursor: pointer;
     transition: all .5s ease-out;
+    text-decoration: none;
     color: ${props => props.light ? 'black' : 'white' };
     background-color: ${props => props.bgColor ? props.bgColor : 'black'};
     ${props => props.disabled && 

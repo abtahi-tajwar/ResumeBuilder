@@ -5,8 +5,10 @@ import { Avatar } from '../MainStyle.style';
 import { Button, Flex } from '../MainStyle.style';
 import { useSelector } from 'react-redux';
 import Verification from '../pages/Verification';
+import { Link } from 'react-router-dom';
+import { WINDOW_SIZE_M } from '../../hooks/useWindowSize';
 
-function Topnav() {
+function Topnav({ windowSize }) {
 
     const userState = useSelector(state => state.userState)
     const isLoggedIn = userState.isLoggedIn
@@ -17,22 +19,33 @@ function Topnav() {
     return (
         <Wrapper>
             {loginStatus === 0 && <Verification />}
-            <NavWrapper bgColor={colors.gray}>
+            <NavWrapper 
+                bgColor={colors.gray}
+                device_size={windowSize.device_size}
+            >
 
                 {/* <p>Username</p>
             <Avatar src="empty.jpg" height="40px" width="40px"/> */}
                 
-                <div>
+                <Flex>
                     {isLoggedIn ?
                         <p>{user.displayName !== null ? user.displayName : user.email}</p> :
                         <p>Please Login to save your progress</p>
                     }
-                </div>
+                </Flex>
                 {isLoggedIn ?
                     <Avatar src="empty.jpg" height="40px" width="40px" /> :
                     <Flex gap="5px">
-                        <Button bgColor={colors.primary}>Login</Button>
-                        <Button bgColor={colors.primary}>Sign Up</Button>
+                        <Link 
+                            to="/authentication"
+                            style={{ textDecoration: 'none' }}
+                        ><Button bgColor={colors.primary}>Login</Button></Link>
+                        {windowSize.device_size > WINDOW_SIZE_M && 
+                        <Link to="/authentication"
+                            style={{ textDecoration: "none"}}>
+                            <Button bgColor={colors.primary}>Sign Up</Button> 
+                            
+                        </Link>}
                     </Flex>
                 }
             </NavWrapper>
@@ -55,9 +68,8 @@ const NavWrapper = styled.div`
     -webkit-box-shadow: -1px -1px 12px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px -1px 12px -1px rgba(0,0,0,0.75);
     p {
-        font-size: 1.4rem;
+        ${props => props.device_size > WINDOW_SIZE_M ? 'font-size: 1.4rem' : 'font-size: 0.8rem'};
     }
-
-
 `
+
 export default Topnav;

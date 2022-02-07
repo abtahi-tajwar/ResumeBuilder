@@ -12,7 +12,6 @@ function Sidenav({ name, logo }) {
     const variables = useContext(VariableContextValue)
     const colors = variables.colors
 
-    console.log(userState)
     return <Wrapper color={colors.primary}>
         {logo && <CompanyLogo src={logo} alt="Company Logo" />}
         <CompanyName>{name}</CompanyName>
@@ -51,6 +50,7 @@ function Sidenav({ name, logo }) {
 
 const Wrapper = styled.div`
     flex: 1;
+    height: 100%;
     background-color: ${props => props.color ? props.color : 'black'};
     padding-top: 50px;
     display: flex;

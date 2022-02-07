@@ -43,7 +43,7 @@ function ReferencesgroupInput({ items, handleItems, name }) {
         setItem(items[index])
         setCurrentIndex(index)
     }   
-  return <div className="row">
+  return <div>
         <div>
             <LabelnputGroup
                 label="Name"

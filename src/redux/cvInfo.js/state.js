@@ -12,7 +12,7 @@ export const cvInfo = {
         linkedin: 'https://www.linkedin.com/in/abtahi-tajwar/',
         github: 'https://www.github.com/',
         facebook: '',
-        instagram: '',
+        instagram: 'instagram',
         twitter: '',
         pinterest: '',
         skype: ''

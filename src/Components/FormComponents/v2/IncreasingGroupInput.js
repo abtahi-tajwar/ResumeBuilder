@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import LabelnputGroup from '../LabelnputGroup';
 import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
+import useWindowSize from '../../../hooks/useWindowSize';
 // import {Editor, EditorState, RichUtils} from 'draft-js';
 
 function IncreasingGroupInput({ items, handleItems, name }) {
+    const windowSize = useWindowSize()
     const [item, setItem] = useState({
         title: "",
         subtitle: "",
@@ -54,7 +56,7 @@ function IncreasingGroupInput({ items, handleItems, name }) {
         setCurrentIndex(index)
     }    
     return (
-        <div className="row">
+        <div>
             <div>
                 <LabelnputGroup
                     label="Title"

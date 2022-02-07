@@ -20,10 +20,10 @@ function SkillRating({ name, rating, total, color = 'black' }) {
     const render_rating = () => {
         var dots = [];
         for(let i = 0; i < rating; i++) {
-            dots.push(<Dot selected></Dot>)
+            dots.push(<Dot key={i} selected></Dot>)
         }
         for(let i = rating; i < total; i++) {
-            dots.push(<Dot></Dot>)
+            dots.push(<Dot key={i} ></Dot>)
         }
         return dots
     }

@@ -1,0 +1,7 @@
+{
+    "name": "ST Resume Builder",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }

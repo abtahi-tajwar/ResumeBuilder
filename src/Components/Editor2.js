@@ -17,6 +17,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import ClipLoader from "react-spinners/ClipLoader";
 import { setSingleInfo, setGroupInfo, setAvatar, setCVInfo } from '../redux/cvInfo.js/slice';
 import { SetProjectData, GetProjectData } from '../firebase/Projects';
+import useWindowSize, { WINDOW_SIZE_M } from '../hooks/useWindowSize';
+import NavigationTray from './Home/NavigationTray';
+import styled from 'styled-components';
+import { Preview } from 'react-html2pdf';
+import { Link } from 'react-router-dom';
 
 
 function Editor2() {
@@ -24,9 +29,11 @@ function Editor2() {
     /* Functions for handle pdf print and download */
     const componentRef  = useRef()
     const editorRef = useRef(null);
+    const windowSize = useWindowSize()
     const { theme, id } = useParams()
     const [saveMsg, setSaveMsg] = useState()
     const [saveLoading, setSaveLoading] = useState(false)
+    const [isTrayOpen, setIsTrayOpen]= useState(false)
     const dispatch = useDispatch()
 
     const handlePrint = useReactToPrint({
@@ -44,21 +51,18 @@ function Editor2() {
         const pdfDom = document.querySelector(".pdfDownload")
         pdfDom.style.transformOrigin = `top left`
         pdfDom.style.transform = `scale(${scaleFactor})`
-        document.querySelectorAll("i").forEach(item => {
-            item.style.display = 'none'
-            item.insertAdjacentHTML('afterend', '<span className="temporaryAdjacentHtmlForPdfDownload">- &nbsp</span>');
-        })
+
         doc.html(pdfDom, {
             callback: () => {
                 doc.save('resume.pdf');
                 pdfDom.style.transform = `scale(1)`
-                document.querySelectorAll("i").forEach(item => {
-                    item.style.display = 'inline-block'
-                })
-                document.querySelectorAll(".temporaryAdjacentHtmlForPdfDownload").forEach(item => {
-                    item.style.display = 'none'
-                })
-
+                // const docOutput = doc.output("blob");
+                // var csvURL = window.URL.createObjectURL(docOutput);
+                // var tempLink = document.createElement('a');
+                // tempLink.href = csvURL;
+                // tempLink.setAttribute('download', 'resume.pdf');
+                // tempLink.click();
+                
             }
         });
     }
@@ -117,8 +121,16 @@ function Editor2() {
     return (
         <div className='flex'>
             <div className='container flex-1 scroll-window full-height'>
+            <div style={{ marginBottom: '30px'}}>
+                <Link to="/" style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                    padding: '10px',
+                    backgroundColor: '#fafafa',
+                }}><i className="fas fa-chevron-circle-left"></i> Go Back to home <i className="fas fa-home"></i></Link>
+            </div>
             <h2 className="light-text">Live CV Editor</h2>
-                <Flex justify="space-between">                   
+                <Flex justify="space-between" direction={windowSize.width < 440 ? 'column' : 'row' }>                   
                     <div>                        
                         <button onClick={handlePrint} className="btn m-1"><i className="fas fa-print"></i> Print</button>
                         <button onClick={pdfDownload} className="btn m-1"><i className="fas fa-download"></i> Download</button>
@@ -152,11 +164,19 @@ function Editor2() {
                     >                        
                         <TextInput
                             name="name"
-                            key={1}
+                            key="name"
                             value={cvInfo.personalDetails.name}
                             handleInput={handlePersonalDetails}
                             label="Name"
                             placeholder="Your Full Name.."
+                        />
+                        <TextInput
+                            name="subtitle"
+                            key="subtitle"
+                            value={cvInfo.personalDetails.subtitle}
+                            handleInput={handlePersonalDetails}
+                            label="Subtitle"
+                            placeholder="Subtitle, example: your designation.."
                         />
                         <TextInput
                             name="email"
@@ -234,10 +254,18 @@ function Editor2() {
                         />
                         <TextInput
                             name="facebook"
-                            key={6}
+                            key="facebook"
                             value={cvInfo.personalDetails.facebook}
                             handleInput={handlePersonalDetails}
                             label="Facebook"
+                            placeholder="Your Linkedin Information.."
+                        />
+                        <TextInput
+                            name="github"
+                            key="github"
+                            value={cvInfo.personalDetails.github}
+                            handleInput={handlePersonalDetails}
+                            label="Github"
                             placeholder="Your Linkedin Information.."
                         />
                         <TextInput
@@ -344,21 +372,95 @@ function Editor2() {
                     />
                 </Collapsible>
             </div>
-            <div className="scroll-window full-height">
-                <div className="pdfDownload">
-                    <CVPage 
-                        ref={componentRef}
-                        page="letter"
-                        contents={template}   
-                        cvInfo={cvInfo}     
-                        theme={theme}  
-                        id={'template'}                  
-                    />
-                                      
+            { windowSize.device_size <= WINDOW_SIZE_M ?
+                <NavigationTray
+                    opened={isTrayOpen} 
+                    closeIconColor="red"
+                    handleNavOpen={setIsTrayOpen}  
+                    left={false} 
+                >
+                    <div className="scroll-window full-height" style={{ backgroundColor: 'white', position: 'relative' }}>
+                        <div className="">
+                            <CVPage 
+                                ref={componentRef}
+                                page="letter"
+                                contents={template}   
+                                cvInfo={cvInfo}     
+                                theme={theme}  
+                                id={'template'}                  
+                            />
+                                            
+                        </div>
+                        <div className="pdfDownload">
+                            <CVPage 
+                                ref={componentRef}
+                                page="letter"
+                                contents={template}   
+                                cvInfo={cvInfo}     
+                                theme={theme}  
+                                id={'template'}                  
+                            />
+                                            
+                        </div>
+                    </div>                    
+                </NavigationTray> :
+                <div className="scroll-window full-height" style={{backgroundColor: 'white', position: "relative"}}>
+                    <div className="">
+                        <CVPage 
+                            ref={componentRef}
+                            page="letter"
+                            contents={template}   
+                            cvInfo={cvInfo}     
+                            theme={theme}  
+                            id={'template'}                  
+                        />                                        
+                    </div>
+                    <div className="pdfDownload">
+                        <CVPage 
+                            ref={componentRef}
+                            page="letter"
+                            contents={template}   
+                            cvInfo={cvInfo}     
+                            theme={theme}  
+                            id={'template'}                  
+                        />
+                                        
+                    </div>
                 </div>
-            </div>
+            }
+            { windowSize.device_size <= WINDOW_SIZE_M && 
+            <PreviewButton onClick={() => setIsTrayOpen(true)}>
+                <i class="far fa-eye"></i>
+                <p>Preview</p>
+            </PreviewButton> }
+            {isTrayOpen && <ScreenOverlay />}
         </div>
     );
 }
 
+const PreviewButton = styled.div`
+    position: fixed;
+    right: 10px;
+    top: 50px;
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    background-color: #fb8500;
+    font-size: 0.7rem;
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+`
+const ScreenOverlay = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    background-color: rgba(0, 0, 0, 0.6);
+`
 export default Editor2;

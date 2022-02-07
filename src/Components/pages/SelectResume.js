@@ -5,9 +5,11 @@ import { TestProjectData, GetAllProjects } from '../../firebase/Projects';
 import { useSelector } from 'react-redux';
 import CVPage from '../Templates/CVPage';
 import styled from 'styled-components';
+import useWindowSize, { WINDOW_SIZE_M } from '../../hooks/useWindowSize';
 
 function SelectResume() {
     const userState = useSelector(state => state.userState)
+    const windowSize = useWindowSize()
     const user = userState.user
     const loginStatus = userState.loginStatus
     const [projects, setProjects] = useState()
@@ -21,9 +23,9 @@ function SelectResume() {
   return <div>
       {projects && <Section style={{ marginBottom: '50px'}}>
           <h1 style={{marginBottom: '20px'}}>Saved CV Projects</h1>
-        <GridGallery width="300px">
-            {projects.map(item => (
-                <Link to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>
+        <GridGallery autoFit width={windowSize.width <= 655 ? '150px' : '300px'}>
+            {projects.map((item, index) => (
+                <Link key={index} to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>
                     <SavedProjectWrapper>                        
                         <CVPage 
                             page="letter"
@@ -42,9 +44,9 @@ function SelectResume() {
       </Section>}
     <h1>Select A Resume template to start</h1>
     <Section>        
-        <GridGallery width="300px">
+        <GridGallery width={windowSize.width <= 450 ? '150px' : '300px'}>
             <Link to="/editor/compact">
-                <Thumbnail name="Compact" >
+                <Thumbnail name="Compact">
                     <img src="img/Compact.png" />
                 </Thumbnail> 
             </Link>
