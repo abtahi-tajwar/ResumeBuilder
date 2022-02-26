@@ -33,17 +33,11 @@ export function TestProjectData(setData) {
     })
 }
 export function GetProjectData(user, id, callback) {
-    console.log("Running")
     const db = getFirestore()
-    if(!user) {
-        console.log("Please login first")
-        return
-    }
-    getDoc(doc(db, "Projects", user.uid, "user_projects", id)).then(doc => {
-        
+    getDoc(doc(db, "Projects", user.uid, "user_projects", id)).then(doc => {        
         if(doc.exists()) {
             console.log(doc.data())
-            callback(doc.data())
+            callback(doc.data(), null)
         } else {
             callback(false)
         }

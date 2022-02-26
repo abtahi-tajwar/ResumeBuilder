@@ -7,10 +7,13 @@ import Serif from './Serif/Serif'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux';
 import { ScaleLoader } from 'react-spinners'
+import RenderDynamicTheme from './__DynamicTheme/RenderDynamicTheme'
+import { GetTemplateData } from '../../firebase/Templates'
 
 export default class CVPage extends Component {
+    
     render() {
-        const { page, contents, theme, cvInfo, thumbnail } = this.props
+        const { page, contents, theme, cvInfo, thumbnail, isStatic } = this.props
         return (
             <div className="pdfDownload_2">
                 {/* <Builder page={page} contents={contents}/> */}
@@ -19,6 +22,7 @@ export default class CVPage extends Component {
                         {theme.toLowerCase() === 'compact' && <Compact cvInfo={cvInfo} /> }
                         {theme.toLowerCase() === 'elfin' && <Elfin cvInfo={cvInfo}/> }
                         {theme.toLowerCase() === 'serif' && <Serif cvInfo={cvInfo} /> }
+                        { !isStatic && <RenderDynamicTheme theme={theme} /> }
                         {/* <Elfin cvInfo={cvInfo} /> */}
                     </LetterPage> :
                     <Wrapper>

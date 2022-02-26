@@ -34,8 +34,9 @@ function Editor2() {
     const [saveMsg, setSaveMsg] = useState()
     const [saveLoading, setSaveLoading] = useState(false)
     const [isTrayOpen, setIsTrayOpen]= useState(false)
+    const [isStaticTheme, setIsStaticTheme] = useState(true)
     const dispatch = useDispatch()
-
+    const staticThemes = ["compact", "elfin", "serif"]
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })
@@ -86,6 +87,9 @@ function Editor2() {
                 const obj = JSON.parse(data.cvInfo)
                 dispatch(setCVInfo(obj))
             })
+        }
+        if(staticThemes.includes(theme)) {
+            setIsStaticTheme(false)
         }
     }, [])
     // Form Handling functions
@@ -422,6 +426,7 @@ function Editor2() {
                             contents={template}   
                             cvInfo={cvInfo}     
                             theme={theme}  
+                            isStatic={isStaticTheme}
                             id={'template'}                  
                         />
                                         

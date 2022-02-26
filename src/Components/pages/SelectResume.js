@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import CVPage from '../Templates/CVPage';
 import styled from 'styled-components';
 import useWindowSize, { WINDOW_SIZE_M } from '../../hooks/useWindowSize';
+import { GetAllTemplates } from '../../firebase/Templates';
 
 function SelectResume() {
     const userState = useSelector(state => state.userState)
@@ -13,6 +14,12 @@ function SelectResume() {
     const user = userState.user
     const loginStatus = userState.loginStatus
     const [projects, setProjects] = useState()
+    const [templates, setTemplates] = useState([])
+    useEffect(() => {
+        GetAllTemplates(templates => {
+            setTemplates(templates)
+        })
+    }, [])
     useEffect(() => {
         if(loginStatus === 1) {
             GetAllProjects(user, projects => {
@@ -60,6 +67,11 @@ function SelectResume() {
                     <img src="img/Serif.png" />
                 </Thumbnail> 
             </Link>
+            {templates.map(item => <Link to={`/editor/${item.name}`}>
+                <Thumbnail name={item.name} >
+                    <img src="img/no-image.jpg" />
+                </Thumbnail> 
+            </Link>)}
         </GridGallery>
     </Section>
   </div>;
