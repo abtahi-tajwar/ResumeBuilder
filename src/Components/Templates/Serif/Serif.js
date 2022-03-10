@@ -152,6 +152,7 @@ const Wrapper  = styled.div`
     border-top: ${spacings.pageMargin} solid ${colors.primary};
     font-family: 'Cinzel', serif;
     color: ${colors.dark};
+    height: 100%;
 `
 const Name = styled.h1`
     font-size: 3rem;

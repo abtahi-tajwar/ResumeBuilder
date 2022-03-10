@@ -17,7 +17,7 @@ export async function signUp(email, password) {
     console.log(email, password)
     try {
         user = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(user)
+        sendUserVerficationEmail()
     } catch (error) {
         console.log(error)
         user = { 

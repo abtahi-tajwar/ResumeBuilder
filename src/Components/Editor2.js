@@ -22,6 +22,7 @@ import NavigationTray from './Home/NavigationTray';
 import styled from 'styled-components';
 import { Preview } from 'react-html2pdf';
 import { Link } from 'react-router-dom';
+import { styles } from './MainStyle.style';
 
 
 function Editor2() {
@@ -31,6 +32,7 @@ function Editor2() {
     const editorRef = useRef(null);
     const windowSize = useWindowSize()
     const { theme, id } = useParams()
+    const [themeState, setThemeState] = useState(theme)
     const [saveMsg, setSaveMsg] = useState()
     const [saveLoading, setSaveLoading] = useState(false)
     const [isTrayOpen, setIsTrayOpen]= useState(false)
@@ -73,7 +75,7 @@ function Editor2() {
     const template = template1
     const states = useSelector(state => state)
     let cvInfo = states.cvInfo
-    const userInfo = states.userState.user
+    const userInfo = states.userState
     const handleAbout = () => {
         dispatch(setSingleInfo({
             groupName: 'personalDetails',
@@ -83,12 +85,16 @@ function Editor2() {
     }
     useEffect(() => {
         if(id) {
-            GetProjectData(userInfo, id, data => {
-                const obj = JSON.parse(data.cvInfo)
-                dispatch(setCVInfo(obj))
-            })
+            if (userInfo.user) {
+
+                GetProjectData(userInfo.user, id, data => {
+                    setThemeState(data.theme)
+                    const obj = JSON.parse(data.cvInfo)
+                    dispatch(setCVInfo(obj))
+                })
+            }
         }
-        if(staticThemes.includes(theme)) {
+        if(!staticThemes.includes(theme)) {
             setIsStaticTheme(false)
         }
     }, [])
@@ -114,7 +120,7 @@ function Editor2() {
     const saveCurrentData = () => {
         setSaveLoading(true)
         setSaveMsg(<div><ClipLoader color="gray" loading={true} size={10} /> Saving </div>)
-        SetProjectData(userInfo, theme, cvInfo, id, (docRef) => {
+        SetProjectData(userInfo.user, theme, cvInfo, id, (docRef) => {
             setSaveLoading(false)
             setSaveMsg(<div><p style={{color: 'green'}}><i className="fas fa-check"> Saved</i></p></div>)
             setTimeout(() => {
@@ -141,7 +147,10 @@ function Editor2() {
                     </div>
                     <Flex gap="10px">
                         {saveMsg}
-                        <Button onClick={saveCurrentData} disabled={saveLoading}><i className="fas fa-save"></i>&nbsp;&nbsp; Save Your Progress</Button>
+                        { userInfo.loginStatus === -1 && <Button>
+                            <Link to="/authentication" target="_blank" style={styles.link}>Please login to save your work</Link></Button> }
+                        { userInfo.loginStatus === 0 && <p>Please confirm your email to save</p>}
+                        { userInfo.loginStatus === 1 && <Button onClick={saveCurrentData} disabled={saveLoading}><i className="fas fa-save"></i>&nbsp;&nbsp; Save Your Progress</Button> }
                         {/* <button onClick={saveCurrentData} className="btn btn-accent mt-1"><i className="fas fa-save"></i> Save Your Progress </button> */}
                     </Flex>
                 </Flex>
@@ -390,7 +399,7 @@ function Editor2() {
                                 page="letter"
                                 contents={template}   
                                 cvInfo={cvInfo}     
-                                theme={theme}  
+                                theme={themeState}  
                                 id={'template'}                  
                             />
                                             
@@ -401,7 +410,7 @@ function Editor2() {
                                 page="letter"
                                 contents={template}   
                                 cvInfo={cvInfo}     
-                                theme={theme}  
+                                theme={themeState}  
                                 id={'template'}                  
                             />
                                             
@@ -415,7 +424,8 @@ function Editor2() {
                             page="letter"
                             contents={template}   
                             cvInfo={cvInfo}     
-                            theme={theme}  
+                            theme={themeState}  
+                            isStatic={isStaticTheme}
                             id={'template'}                  
                         />                                        
                     </div>
@@ -425,7 +435,7 @@ function Editor2() {
                             page="letter"
                             contents={template}   
                             cvInfo={cvInfo}     
-                            theme={theme}  
+                            theme={themeState}  
                             isStatic={isStaticTheme}
                             id={'template'}                  
                         />

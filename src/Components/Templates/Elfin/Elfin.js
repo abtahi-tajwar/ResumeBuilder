@@ -15,7 +15,7 @@ import Icon from '../../Icons/Icon';
 function Elfin({ cvInfo }) {
   return (
   <Wrapper>
-      <DoubleColumn left="2" right="5">
+      <DoubleColumn left="2" right="5" height="100%">
           <div style={{ padding: '20px', backgroundColor: colors.primary }}>
             <Section>
                 <Flex>
@@ -147,7 +147,7 @@ const colors = {
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 100%;
+    min-height: inherit;
     font-family: 'Raleway', sans-serif;
     font-size: 0.8rem;
 `

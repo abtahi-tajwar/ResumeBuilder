@@ -8,8 +8,8 @@ import useWindowSize from '../../../hooks/useWindowSize';
 function IncreasingGroupInput({ items, handleItems, name }) {
     const windowSize = useWindowSize()
     const [item, setItem] = useState({
-        title: "",
-        subtitle: "",
+        title: "New title",
+        subtitle: "place your subtitle here",
         date: "",
         description: ""
     })
@@ -40,8 +40,8 @@ function IncreasingGroupInput({ items, handleItems, name }) {
     const addData = () => {
         handleItems(0, 
             {
-                title: "",
-                subtitle: "",
+                title: "New title",
+                subtitle: "place your subtitle here",
                 date: "",
                 description: ""
             }, 

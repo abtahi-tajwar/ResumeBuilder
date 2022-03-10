@@ -32,11 +32,11 @@ export const CV = styled.div`
 `
 export const LetterPage = styled.div`
     padding: ${props => props.margin === 'auto' ? '0.4in 0.6in 0.6in 0.6in' : props.margin};
-    height: minmax(${792 * 1}pt, auto);
+    min-height: ${792 * 1}pt;
+    height: 1px;
     width: ${612 * 1}pt;
     background-color: ${props => props.bgColor};
     box-sizing: border-box;    
-    border: 0.5px dotted gray;
     display: flex;
     flex-direction: column;
 `;
@@ -53,6 +53,7 @@ export const SubSection = styled.div`
 export const DoubleColumn = styled.div`
     display: flex;
     gap: 20px;
+    ${props => props.minHeight && `min-height: ${props.minHeight};`}
     height: ${props => props.height ? props.height : 'auto'};
     & > div {
         box-sizing: border-box;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { unstable_createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { colors } from './CVComponents/Style.style';
 export const DoubleColumn = styled.div`
@@ -113,3 +114,9 @@ export const Heading  = styled.div`
     }
     
 `
+export const styles = {
+    link: {
+        textDecoration: 'none',
+        color: 'unset'
+    }
+}

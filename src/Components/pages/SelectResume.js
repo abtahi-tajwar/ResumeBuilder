@@ -67,11 +67,11 @@ function SelectResume() {
                     <img src="img/Serif.png" />
                 </Thumbnail> 
             </Link>
-            {templates.map(item => <Link to={`/editor/${item.name}`}>
+            {/* {templates.map(item => <Link to={`/editor/${item.name}`}>
                 <Thumbnail name={item.name} >
                     <img src="img/no-image.jpg" />
                 </Thumbnail> 
-            </Link>)}
+            </Link>)} */}
         </GridGallery>
     </Section>
   </div>;

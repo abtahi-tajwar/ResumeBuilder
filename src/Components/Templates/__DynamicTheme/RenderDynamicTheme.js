@@ -9,10 +9,17 @@ function RenderDynamicTheme({ theme }) {
   })
   useEffect(() => {
     GetTemplateData(theme, (data, error) => {
-      setOutput({
-        htmlCode: data.style,
-        styleCode: data.body
-      })
+      if(data) {
+        setOutput({
+          htmlCode: data.style,
+          styleCode: data.body
+        })
+      } else {
+        setOutput({
+          htmlCode: 'Something went wrong',
+          styleCode: 'padding: 20px;'
+        })
+      }
     })
   }, [])
   useEffect(() => {
