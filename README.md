@@ -6,6 +6,6 @@ The main purpose of this application is to build beaitful resume very easily. Ju
  - jsPDF : http://raw.githack.com/MrRio/jsPDF/master/docs/
  - styled-components: https://styled-components.com/
 ### Available on:
- - **hosted on:** https://6200cf379586843a739fff57--st-resume-builder.netlify.app/
+ - **hosted on:** https://st-resume-builder.netlify.app/
  - **Download the mobile apk on:** https://drive.google.com/file/d/12SaeG-wpIgsTRGOXE1MMylnVsBrGR-NW/view?usp=drivesdk
 
