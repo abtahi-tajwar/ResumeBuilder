@@ -57,6 +57,7 @@ function Home() {
             }
             {/* <Sidenav 
                 name="Resume Builder"
+                
             /> */}
             <Body>
                 <Topnav 
