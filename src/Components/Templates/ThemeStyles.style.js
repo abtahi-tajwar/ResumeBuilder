@@ -32,6 +32,7 @@ export const Avatar = styled.img`
 `
 export const List = styled.ul`
     list-style-type: none;
+    word-break: break-all;
     li {
         margin-bottom: 10px;
         align-items: center;

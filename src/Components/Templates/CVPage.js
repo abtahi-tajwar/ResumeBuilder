@@ -4,6 +4,7 @@ import { LetterPage } from '../CVComponents/Style.style'
 import Compact from './Compact/Compact'
 import Elfin from './Elfin/Elfin'
 import Serif from './Serif/Serif'
+import Dazzle from './Dazzle/Dazzle'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux';
 import { ScaleLoader } from 'react-spinners'
@@ -24,7 +25,8 @@ export default class CVPage extends Component {
                             {theme.toLowerCase() === 'compact' && <Compact cvInfo={cvInfo} /> }
                             {theme.toLowerCase() === 'elfin' && <Elfin cvInfo={cvInfo}/> }
                             {theme.toLowerCase() === 'serif' && <Serif cvInfo={cvInfo} /> }
-                            { isStatic === false && <RenderDynamicTheme theme={theme} /> }
+                            {theme.toLowerCase() === 'dazzle' && <Dazzle cvInfo={cvInfo} /> }
+                            { !isStatic && <RenderDynamicTheme theme={theme} /> }
                             {/* <Elfin cvInfo={cvInfo} /> */}
                         </LetterPage> :
                         <Wrapper>

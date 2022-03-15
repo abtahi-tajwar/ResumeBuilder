@@ -38,7 +38,7 @@ function Editor2() {
     const [isTrayOpen, setIsTrayOpen]= useState(false)
     const [isStaticTheme, setIsStaticTheme] = useState(true)
     const dispatch = useDispatch()
-    const staticThemes = ["compact", "elfin", "serif"]
+    const staticThemes = ["compact", "elfin", "serif", "dazzle"]
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })
