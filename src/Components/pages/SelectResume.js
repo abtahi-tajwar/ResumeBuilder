@@ -67,6 +67,11 @@ function SelectResume() {
                     <img src="img/Serif.png" />
                 </Thumbnail> 
             </Link>
+            <Link to="/editor/dazzle">
+                <Thumbnail name="Dazzle" >
+                    <img src="img/Dazzle.png" />
+                </Thumbnail> 
+            </Link>
             {/* {templates.map(item => <Link to={`/editor/${item.name}`}>
                 <Thumbnail name={item.name} >
                     <img src="img/no-image.jpg" />
