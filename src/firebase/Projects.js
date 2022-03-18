@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './init'
 import { useSelector } from 'react-redux';
-import { getFirestore, doc, getDoc, collection, setDoc, addDoc, getDocs } from "firebase/firestore"
+import { getFirestore, doc, getDoc, collection, setDoc, addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore"
 export function TestProjectData(setData) {
     const renderCount = useRef(0)    
     const userState = useSelector(state => state.userState)
@@ -64,8 +64,11 @@ export function GetAllProjects(user, callback) {
 export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
     const db = getFirestore()    
     const collectionRef = collection(db, "Projects", user.uid, "user_projects")
-    console.log(collectionRef)
     let docRef = null
+    cvInfo = {
+        ...cvInfo,
+        avatar: '../../empty.jpg'
+    }
     if(!docId) {
         addDoc(collectionRef, {
             theme: theme,
@@ -74,7 +77,7 @@ export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
             callback(docRef)
         })
     } else {
-        docRef = setDoc(doc(collectionRef, docId), {
+        docRef = updateDoc(doc(collectionRef, docId), {
             theme: theme,
             cvInfo: JSON.stringify(cvInfo)
         }).then(docRef => {
@@ -83,4 +86,13 @@ export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
     }
 
     return docRef
+}
+
+export function DeleteProjectData(user, docId, callback) {
+    const db = getFirestore()  
+    deleteDoc(doc(db, "Projects", user.uid, "user_projects", docId)).then(result => {
+        callback(result, null)
+    }).catch(e => {
+        callback(null,e)
+    })
 }

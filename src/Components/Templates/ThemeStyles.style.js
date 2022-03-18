@@ -24,7 +24,9 @@ export const Flex = styled.div.attrs(props => ({
 export const Section = styled.div`
     margin-bottom: 15px;
 `
-export const Avatar = styled.img`
+export const Avatar = styled.img.attrs(props => ({
+    src: props.src === "" ? '../empty.jpg' : props.src
+}))`
     height: ${props => props.height ? props.height : '128px'};
     width: ${props => props.width ? props.width : '128px'};
     border-radius: 50%;

@@ -33,6 +33,7 @@ export default class CVPage extends Component {
                             {theme.toLowerCase() === 'compact' && <Compact cvInfo={cvInfo} /> }
                             {theme.toLowerCase() === 'elfin' && <Elfin cvInfo={cvInfo}/> }
                             {theme.toLowerCase() === 'serif' && <Serif cvInfo={cvInfo} /> }
+                            {theme.toLowerCase() === 'dazzle' && <Dazzle cvInfo={cvInfo} /> }
                         </Wrapper>
                     }
                 </div> :

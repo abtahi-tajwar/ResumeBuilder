@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Section, GridGallery, Thumbnail } from './PageStyle.style';
 import { Link } from 'react-router-dom';
-import { TestProjectData, GetAllProjects } from '../../firebase/Projects';
+import { TestProjectData, GetAllProjects, DeleteProjectData } from '../../firebase/Projects';
 import { useSelector } from 'react-redux';
 import CVPage from '../Templates/CVPage';
 import styled from 'styled-components';
@@ -27,27 +27,41 @@ function SelectResume() {
             })
         } 
     }, [user])
+    const handleDeleteProject = (docId) => {
+        DeleteProjectData(user, docId, (result, error) => {
+            if(!error) {
+                GetAllProjects(user, projects => {
+                    setProjects(projects)
+                })
+            }
+        })
+    }
   return <div>
       {projects && <Section style={{ marginBottom: '50px'}}>
           <h1 style={{marginBottom: '20px'}}>Saved CV Projects</h1>
-        <GridGallery autoFit width={windowSize.width <= 655 ? '150px' : '300px'}>
-            {projects.map((item, index) => (
-                <Link key={index} to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>
-                    <SavedProjectWrapper>                        
-                        <CVPage 
-                            page="letter"
-                            cvInfo={JSON.parse(item.cvInfo)}
-                            theme={item.theme}
-                            thumbnail={true}
-                        />                        
-                        <div className="info">
-                            <p>{JSON.parse(item.cvInfo).personalDetails.name}</p>
-                            <p className='subtitle'>{JSON.parse(item.cvInfo).personalDetails.subtitle}</p>
-                        </div>
-                    </SavedProjectWrapper>
-                </Link>
-            ))}                
-        </GridGallery>
+            <GridGallery autoFit width={windowSize.width <= 655 ? '150px' : '300px'}>
+                {projects.map((item, index) => (
+                    <div style={{position: 'relative'}}>
+                        <DeleteButton className="deleteButton" onClick={() => handleDeleteProject(item.id)}>                                
+                            <span>Delete</span> <i class="bi bi-x-circle-fill"></i>              
+                        </DeleteButton>
+                        <Link key={index} to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>                            
+                            <SavedProjectWrapper>                              
+                                <CVPage 
+                                    page="letter"
+                                    cvInfo={JSON.parse(item.cvInfo)}
+                                    theme={item.theme}
+                                    thumbnail={true}
+                                />                        
+                                <div className="info">
+                                    <p>{JSON.parse(item.cvInfo).personalDetails.name}</p>
+                                    <p className='subtitle'>{JSON.parse(item.cvInfo).personalDetails.subtitle}</p>
+                                </div>
+                            </SavedProjectWrapper>                            
+                        </Link>
+                    </div>
+                ))}                
+            </GridGallery>
       </Section>}
     <h1>Select A Resume template to start</h1>
     <Section>        
@@ -82,12 +96,32 @@ function SelectResume() {
   </div>;
 }
 
+const DeleteButton = styled.div`
+    color: white;
+    background-color: red;
+    border-radius: 4px;
+    position: absolute;
+    right: 0px;
+    top: -30px;
+    font-size: 0.7rem;
+    padding: 3px;
+    cursor: pointer;
+    transition: transform .2s ease-out;
+    i {
+        margin-top: -5px;
+    }
+    &:hover {
+        transform: scale(1.3);
+    }
+`
+
 const SavedProjectWrapper = styled.div`
     width: 100%;
     box-shadow: 7px 2px 11px 0px rgba(0,0,0,0.13);
     box-sizing: border-box;
     transition: box-shadow .3s ease-out;
     color: black;
+    position: relative;
     &:hover {
         box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.13);
     }

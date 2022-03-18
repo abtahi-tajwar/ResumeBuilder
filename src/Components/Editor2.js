@@ -86,10 +86,23 @@ function Editor2() {
     useEffect(() => {
         if(id) {
             if (userInfo.user) {
-
                 GetProjectData(userInfo.user, id, data => {
+                    console.log(data)
+                    
                     setThemeState(data.theme)
-                    const obj = JSON.parse(data.cvInfo)
+                    let obj = JSON.parse(data.cvInfo)
+
+                    // Checking if image actually exists or not
+                    var myImg = new Image;
+                    myImg.src = obj.avatar;
+                    myImg.onerror = function(){
+                        obj = {
+                            ...obj,
+                            avatar: '../../empty.jpg'
+                        }
+                        
+                    }
+                    console.log(obj)
                     dispatch(setCVInfo(obj))
                 })
             }
