@@ -15,7 +15,6 @@ export default class CVPage extends Component {
     
     render() {
         const { page, contents, theme, cvInfo, thumbnail, isStatic } = this.props
-        console.log("IS Static", isStatic, theme)
         return (
             theme ? 
                 <div className="pdfDownload_2">

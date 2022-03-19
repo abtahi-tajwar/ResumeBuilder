@@ -61,7 +61,7 @@ export function GetAllProjects(user, callback) {
     })
     
 }
-export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
+export function SetProjectData(user, theme, cvInfo, projectName, docId=null, callback) {
     const db = getFirestore()    
     const collectionRef = collection(db, "Projects", user.uid, "user_projects")
     let docRef = null
@@ -69,9 +69,15 @@ export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
         ...cvInfo,
         avatar: '../../empty.jpg'
     }
+    console.log({
+        theme: theme,
+        projectName: projectName,
+        cvInfo: JSON.stringify(cvInfo)
+    })
     if(!docId) {
         addDoc(collectionRef, {
             theme: theme,
+            projectName: projectName,
             cvInfo: JSON.stringify(cvInfo)
         }).then(docRef => { 
             callback(docRef)
@@ -79,6 +85,7 @@ export function SetProjectData(user, theme, cvInfo, docId=null, callback) {
     } else {
         docRef = updateDoc(doc(collectionRef, docId), {
             theme: theme,
+            projectName: projectName,
             cvInfo: JSON.stringify(cvInfo)
         }).then(docRef => {
             callback(docRef)

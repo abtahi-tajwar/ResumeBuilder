@@ -44,6 +44,7 @@ function Dazzle({ cvInfo }) {
                 <HeadingSection>
                     <p style={{ color: config.colors.accent }}>Hello, I'm</p>
                     <h1>{ cvInfo.personalDetails.name }</h1>
+                    <b>{ cvInfo.personalDetails.subtitle }</b>
                 </HeadingSection>
                 <SectionContainer2>
                     <h2>About</h2>

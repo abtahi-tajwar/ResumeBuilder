@@ -23,6 +23,9 @@ import styled from 'styled-components';
 import { Preview } from 'react-html2pdf';
 import { Link } from 'react-router-dom';
 import { styles } from './MainStyle.style';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 
 function Editor2() {
@@ -37,6 +40,8 @@ function Editor2() {
     const [saveLoading, setSaveLoading] = useState(false)
     const [isTrayOpen, setIsTrayOpen]= useState(false)
     const [isStaticTheme, setIsStaticTheme] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [projectName, setProjectName] = useState("")
     const dispatch = useDispatch()
     const staticThemes = ["compact", "elfin", "serif", "dazzle"]
     const handlePrint = useReactToPrint({
@@ -86,10 +91,9 @@ function Editor2() {
     useEffect(() => {
         if(id) {
             if (userInfo.user) {
-                GetProjectData(userInfo.user, id, data => {
-                    console.log(data)
-                    
+                GetProjectData(userInfo.user, id, data => {                    
                     setThemeState(data.theme)
+                    
                     let obj = JSON.parse(data.cvInfo)
 
                     // Checking if image actually exists or not
@@ -102,7 +106,13 @@ function Editor2() {
                         }
                         
                     }
-                    console.log(obj)
+
+                    // Initialize project name
+                    if (data.projectName) {
+                        setProjectName(data.projectName)
+                    } else {
+                        setProjectName(obj.personalDetails.name)
+                    }
                     dispatch(setCVInfo(obj))
                 })
             }
@@ -132,8 +142,10 @@ function Editor2() {
     }
     const saveCurrentData = () => {
         setSaveLoading(true)
+        setIsModalOpen(false)
         setSaveMsg(<div><ClipLoader color="gray" loading={true} size={10} /> Saving </div>)
-        SetProjectData(userInfo.user, theme, cvInfo, id, (docRef) => {
+        console.log(userInfo.user, theme, cvInfo, projectName, id)
+        SetProjectData(userInfo.user, theme, cvInfo, projectName, id, (docRef) => {
             setSaveLoading(false)
             setSaveMsg(<div><p style={{color: 'green'}}><i className="fas fa-check"> Saved</i></p></div>)
             setTimeout(() => {
@@ -141,8 +153,41 @@ function Editor2() {
             }, 5000)
         })
     }
+    const handleProjectName = (e) => {
+        setProjectName(e.target.value)
+    }
     return (
         <div className='flex'>
+            {/* Modal box for saving */}
+            <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    border: '2px solid #000',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Project Name" 
+                        variant="outlined" 
+                        value={projectName}
+                        onChange={handleProjectName}
+                        style={{width: '100%', marginBottom: '10px'}}
+                    />
+                    <Button variant="contained" onClick={saveCurrentData}>Save</Button>
+                </Box>
+            </Modal>
+
             <div className='container flex-1 scroll-window full-height'>
             <div style={{ marginBottom: '30px'}}>
                 <Link to="/" style={{
@@ -163,7 +208,7 @@ function Editor2() {
                         { userInfo.loginStatus === -1 && <Button>
                             <Link to="/authentication" target="_blank" style={styles.link}>Please login to save your work</Link></Button> }
                         { userInfo.loginStatus === 0 && <p>Please confirm your email to save</p>}
-                        { userInfo.loginStatus === 1 && <Button onClick={saveCurrentData} disabled={saveLoading}><i className="fas fa-save"></i>&nbsp;&nbsp; Save Your Progress</Button> }
+                        { userInfo.loginStatus === 1 && <Button onClick={() => setIsModalOpen(true)} disabled={saveLoading}><i className="fas fa-save"></i>&nbsp;&nbsp; Save Your Progress</Button> }
                         {/* <button onClick={saveCurrentData} className="btn btn-accent mt-1"><i className="fas fa-save"></i> Save Your Progress </button> */}
                     </Flex>
                 </Flex>

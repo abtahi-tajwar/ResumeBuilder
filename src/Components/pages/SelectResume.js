@@ -43,7 +43,7 @@ function SelectResume() {
                 {projects.map((item, index) => (
                     <div style={{position: 'relative'}}>
                         <DeleteButton className="deleteButton" onClick={() => handleDeleteProject(item.id)}>                                
-                            <span>Delete</span> <i class="bi bi-x-circle-fill"></i>              
+                            <span>Delete</span> <i class="fas fa-trash-alt"></i>              
                         </DeleteButton>
                         <Link key={index} to={`/editor/compact/${item.id}`} style={{ textDecoration: 'none'}}>                            
                             <SavedProjectWrapper>                              
@@ -54,8 +54,9 @@ function SelectResume() {
                                     thumbnail={true}
                                 />                        
                                 <div className="info">
-                                    <p>{JSON.parse(item.cvInfo).personalDetails.name}</p>
-                                    <p className='subtitle'>{JSON.parse(item.cvInfo).personalDetails.subtitle}</p>
+                                    {console.log(item)}
+                                    <p>{item.projectName ? item.projectName : JSON.parse(item.cvInfo).personalDetails.name}</p>
+                                    <p className='subtitle'>{JSON.parse(item.cvInfo).personalDetails.name} &#183; {JSON.parse(item.cvInfo).personalDetails.subtitle}</p>
                                 </div>
                             </SavedProjectWrapper>                            
                         </Link>
@@ -104,11 +105,11 @@ const DeleteButton = styled.div`
     right: 0px;
     top: -30px;
     font-size: 0.7rem;
-    padding: 3px;
+    padding: 3px 6px;
     cursor: pointer;
     transition: transform .2s ease-out;
-    i {
-        margin-top: -5px;
+    i:before {
+        top: -4px;
     }
     &:hover {
         transform: scale(1.3);
