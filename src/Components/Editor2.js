@@ -43,7 +43,7 @@ function Editor2() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [projectName, setProjectName] = useState("")
     const dispatch = useDispatch()
-    const staticThemes = ["compact", "elfin", "serif", "dazzle"]
+    const staticThemes = ["compact", "elfin", "serif", "dazzle", "cheif"]
     const handlePrint = useReactToPrint({
         content: () => componentRef.current
     })

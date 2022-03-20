@@ -1,7 +1,13 @@
 import React from 'react';
 import { List } from '../ThemeStyles.style';
 import Icon from '../../Icons/Icon';
-function RenderSocialMedias({ items, light=true }) {
+function RenderSocialMedias({ items, light=true, omitted=[] }) {
+
+  // This option is for omitting some specific items for themeing
+  // omitted.forEach(name => {
+  //   items[name] = ""
+  // })
+  
   return (
     <List>
         { (items.email && items.email !== "") && <li><span><Icon icon="email" light={light} /></span> { items.email }</li> }
